@@ -1,0 +1,1306 @@
+Extrato Eletrônico
+Financeiro
+EspecificaçãoTécnica
+
+
+
+
+                       Visa
+                       Hipercard
+                       Sorocred
+                       CUP
+                       MasterCard
+                       ® Cabal
+                       Diners Club
+                       Credsystem (Mais)
+                       Banescard
+                       JCB
+                       Credz
+Índice
+
+1   Descrição do produto                    3
+
+
+
+2   Informações diversas                    4
+
+
+
+3   Estrutura das Informações              4
+    3.1 - Extrato EletrônicoFinanceiro     4
+
+
+4   Layout                                  6
+    4.1 - Extrato EletrônicoFinanceiro      6
+
+
+
+5   Tabelas
+    1.   - Tabela I – Tipos de transação
+                                           25
+                                           25
+    2.   - Tabela II – Status do crédito   25
+    3.   - Tabela III – Ajustes            26
+    4.   - Tabela IV – Produtos            27
+
+
+
+6   Veículos de troca de arquivos          27
+Extrato Eletrônico - Especificação Técnica                                                                                                            3
+
+
+
+
+  1 Descrição do produto
+          O Extrato Eletrônico é uma ferramenta que disponibiliza diariamente1 aos estabelecimentos
+          cadastrados a demonstração das transações realizadas com cartões de crédito e débito
+          e informações financeiras, de acordo com as condições estabelecidas nos contratos
+          comerciais.
+
+          Ele é composto de quatro arquivos:
+
+          •EEVD – Extrato Eletrônico de Vendas Débito
+             Transações realizadas com cartões de débito - bandeiras Maestro, Visa Electron,
+             Hiper, Cabal, Sicredi, Banescard, JCBe Credz.
+
+          •EEVC – Extrato Eletrônico de Vendas Crédito
+             Transações realizadas com cartão de crédito - bandeiras MasterCard®, Diners Club,
+             Visa, Cabal, Hipercard, Sorocred, CUP,Cre-System (Mais), Sicredi, Avista e Banescard.
+
+          •EEFI – Extrato Eletrônico Financeiro
+             Informa os ajustes de crédito e débito que serão realizados em D+1, a contar da
+             data do envio do arquivo, indicando o tipo de lançamento e registro específico
+             (desagendamentos de parcelas realizadas). São agrupadas num único arquivo, as
+             informações referentes a créditos normais, créditos decorrentes de Antecipação
+             de Resumo de Vendas (RAV)2, ajustes (débitos e créditos) e desagendamentos.
+
+          •EESA – Movimento Saldos em Aberto
+             Demonstra todos os resumos de vendas e seus respectivos valores a crédito, que
+             serão efetivados futuramente, a partir do 1-ºdia (inclusive) do mês em referência,
+             decorrente das transações realizadas com cartões de crédito, das bandeiras
+             MasterCard® e Diners. Trata-se de uma informação estática, ou seja, não contempla
+             eventuais ajustes de crédito, débito, Net3 e desagendamentosde parcelas.
+
+
+          Principais vantagens para automatização
+             • Integração sistêmica do extrato de vendas e financeiro;
+             • Conciliação automática de seus recebíveis;
+             • Integridade no recebimento das informações/dados;
+             • Agilidade na obtenção dos resultados;
+             • Empresas homologadas pela Rede, para o tráfego dos arquivos;
+             • Ambiente seguro para recebimento dos arquivos;
+             • Permite que sua área de TI ou empresa conciliadora customize
+               as aplicações inerentes a cada setor;
+             • Atualização diária;
+             • Suporte técnico de especialistas.
+
+          1. Exceto para o Extrato Eletrônico de Saldos em Aberto, que é disponibilizado apenas uma vez por mês. 2. RAV– Resumo Antecipado de Vendas
+          Serviço oferecido pela Rede, que permite ao estabelecimento antecipar seus recebimentos futuros. 3. Net – Processo para compensação de ajustes
+          a débito, em resumo de créditos futuros.
+Extrato Eletrônico - Especificação Técnica                                                         4
+
+
+
+
+ 2       Informações diversas
+         • Seocorrer algum tipo de problema no processamento do arquivo, redirecioná-lopara
+           a Redecard, para que haja uma análise detalhada.
+
+         • Quando não existir movimento, será enviado ao estabelecimento um arquivo contendo
+           o header e o trailler, com os campos“zerados”.
+
+         • Em caso de reprocessamento do arquivo:
+
+                 - À data do header (registro 00 – 3ª-coluna) será atribuída a data em que o
+                   reprocessamento ocorrer.
+                 - À sequência do movimento (registro 00 – 8ª-coluna) será atribuído“000001”.
+
+         • O estabelecimento que pretende receber o Extrato Eletrônico deverá contratar uma
+           VAN(conforme item 4), informar o número de filiação e os produtos que deseja receber:
+
+         EEVC - Extrato Eletrônico de Vendas Crédito
+         EEVD - Extrato Eletrônico de Vendas Débito
+         EEFI - Extrato EletrônicoFinanceiro
+         EESA - Extrato Eletrônico de SaldosemAberto
+
+         • Nomenclaturas:
+
+         RV - (Resumo deVendas)
+         CV - (Comprovante deVenda)
+         NSU - (Número Sequencial Único)
+         RAV - (Resumo Antecipado deVendas)
+         AVS - (Address VerificationSystem)
+         TO - (Transmissão Off-line)
+         OC - (Ordem deCrédito)
+
+
+ 3       Estrutura das informações
+          1. Extrato Eletrônico Financeiro
+
+          O Extrato Eletrônico Financeiro reúne as informações doscréditos
+          e débitos que serão realizados nos domicílios bancários do estabelecimento,
+          no próximo dia útil à recepção doarquivo.
+
+          Em um mesmo arquivo são informados os créditos normais, as antecipações
+          e os lançamentos realizados a crédito e a débito.
+Extrato Eletrônico - Especificação Técnica                                                              5
+
+
+
+
+          Os lançamentos que não decorrem de um crédito normal ou antecipação possuem um
+          código que identifica o motivo do lançamento. Elespodem ter origem em um ajuste (crédito
+          complementar, débito referente a chargeback de transação etc.) ou em uma tarifa de
+          serviços, como aluguel de POS.
+
+          O Extrato Eletrônico Financeiro organiza as informações por matriz do estabelecimento e por
+          tipo de lançamento.
+
+          Sua organização é descritaabaixo:
+
+         030 – Header doArquivo
+         032– Header do Solicitante
+         034 – Ordem de Crédito (esseregistro deverá seracompanhado
+                do registro 35, caso haja algum Ajuste Net oudesagendamento)
+         035 – Ajustes Net e Desagendamento
+         053 – Ajustes Net e Desagendamentos(E-Commerce)
+         036– RAV- Resumo Antecipado de Vendas (esse registro deverá ser acompanhado do
+         registro 35, caso haja algum Ajuste Net ou desagendamento)
+         037– Totalizador de Créditos (normais eantecipados)
+         038– Ajustes a Débito (via Banco)
+         054 – Ajustes a Débito (via Banco) - (E-Commerce)
+         040 – Serasa – Identifica detalhes das consultas Serasa
+         041 – AVS– Identifica detalhes das consultasAVS
+         042 – SecureCode – identifica detalhes das consultasSecureCode
+         043 – Ajustes a Crédito (esse registro deverá ser acompanhado
+                do registro 35, caso haja algum AjusteNet)
+         044 – DébitosPendentes
+         055 – Débitos Pendentes(E-Commerce)
+         045 – DébitosLiquidados
+         056 – Débitos Liquidados(E-Commerce)
+         049 – Desagendamento das Parcelas com informações complementares
+         057 – Desagendamento dasParcelascom informaçõescomplementares(E-Commerce)
+         050 – Totalizador doSolicitante
+         052 – Trailer doArquivo
+
+          Obs.: os registros são gerados em nosso sistema com tamanho de até 1.024 posições (VB) e
+          não são fixos. Considerar campo livre após a informação da última coluna de cada registro.
+Extrato Eletrônico - Especificação Técnica                                                                  6
+
+
+
+
+ 4        Layout
+          4.1 – Extrato Eletrônico Financeiro
+
+                                           Registro 030 - Header de arquivo
+
+              Início           Fim       Tam.            Pic         Descrição
+               001             003        003           Num.         Tipo de registro (“030”)
+               004             011        008           Num.         Data de emissão (DDMMAAAA)
+               012             019        008            Alfa        “Rede”
+               020             053        034            Alfa        “Extrato de movimentação financeira”
+               054             075        022            Alfa        Nome comercial (grupo/matriz)
+               076             081        006           Num.         Sequência do movimento
+               082             090        009           Num.         Nº-PVgrupo oumatriz
+               091             105        015            Alfa        Tipo de processamento
+               106             125        020            Alfa        Versão do arquivo
+
+
+
+                                                Critérios de edição dos dados
+
+           Tipo do registro                                “030” =Header do arquivo
+                                                           Data de emissão do arquivo; formato:numérico,
+           Data de emissão
+                                                           na forma“DDMMAAAA”
+           Rede                                            Literal
+           Extrato de movimentação financeira              Literal
+           Nome comercial                                  Nome fantasia que identifica o grupo oumatriz
+                                                           Sequencial iniciado em 000001 e incrementado
+           Sequência do movimento
+                                                           de 1 a cada movimento enviado
+           Nº-PVgrupo oumatriz                             Código do ponto de venda, grupo oumatriz
+           Tipo de processamento                           Diário ou reprocessamento
+           Versão do arquivo                               3.01 – 09/06 – EEFI
+
+
+
+                                                Registro 032 - Header – Matriz
+
+              Início           Fim       Tam.            Pic         Descrição
+               001             003        003           Num.         Tipo de registro (“032”)
+               004             012        009            Alfa        Nº-PVmatriz
+               013             034        022            Alfa        Nome comercial da matriz
+
+
+
+                                                Critérios de edição dos dados
+
+           Tipo do registro                                “032” = Header de matriz
+           Nº-PVmatriz                                     Código do ponto de vendamatriz
+           Nome comercial da matriz                        Nome fantasia que identifica amatriz
+Extrato Eletrônico - Especificação Técnica                                                               7
+
+
+
+
+                                                Registro 034 -Créditos
+
+              Início           Fim     Tam.           Pic       Descrição
+               001             003     003           Num.       Tipo de registro (“034”)
+               004             012     009           Num.       Número do PVcentralizador
+               013             023     011           Num.       Número do documento
+               024             031     008           Num.       Data do lançamento(DDMMAAAA)
+               032             046     015          9(13)V99    Valor do lançamento
+               047             047     001            Alfa      C(Crédito)
+               048             050     003           Num.       Banco
+               051             056     006           Num.       Agência
+               057             067     011           Num.       Conta-corrente
+               068             075     008           Num.       Data do movimento (DDMMAAAA)
+               076             084     009           Num.       Número do RV
+               085             092     008           Num.       Data do RV(DDMMAAAA)
+               093             093     001            Alfa      Bandeira
+               094             094     001           Num.       Tipo de transação
+               095             109     015          9(13)V99    Valor bruto do RV
+               110             124     015          9(13)V99    Valor da taxa de desconto
+               125             129     005            Alfa      Número da parcela/total
+               130             131     002            Alfa      Status do crédito - TabelaII
+               132             140     009           Num.       Nº-PVoriginal
+
+
+                                             Critérios de edição dos dados
+
+           Tipo do registro                             “034” = Créditos
+           Número do PV                                 Número do PVcreditado
+           Número do documento                          Número da Ordem de Crédito
+                                                        Data que será realizado o lançamento
+           Data do lançamento
+                                                        no domicílio bancário
+           Valor do lançamento                          Valor do lançamento a ser realizado
+           C(Crédito)                                   Indicador de crédito
+           Banco                                        Código de registro do banco no BancoCentral
+           Agência                                      Prefixo da agência
+           Conta-corrente                               Número da conta-corrente
+           Data do movimento (DDMMAAAA)                 Data da emissão da ODCDDMMAAAA
+           Número do RV                                 Número do RVque originou ocrédito
+           Data do RV(DDMMAAAA)                         Data do RVno formatoDDMMAAAA
+           Bandeira                                     Identifica a bandeira do cartão
+                                                        Identifica transações à vista, parceladas etc.
+           Tipo de transação
+                                                        (ver tabela I)
+                                                        Valor total do RVacatado pela Rede no
+           Valor bruto do RV
+                                                        processamento, já descontadas asrejeições
+           Valor da taxa de desconto                    Valor total da taxa de desconto
+                                                        Número da parcela/total que serácreditada,
+           Número da parcela/total
+                                                        caso seja um resumo parcelado (XX/XX)
+           Status do crédito                            Status do crédito - TabelaII
+           Número do PVoriginal                         Número do PVque originou ocrédito
+Extrato Eletrônico - Especificação Técnica                                                                  8
+
+
+
+
+                                  Registro 035 - Ajustes Net e Desagendamentos
+
+             Início       Fim         Tam.         Pic     Descrição
+              001          003         003        Num.     Tipo de registro (“035”)
+              004          012         009        Num.     Número do PVajustado
+              013          021         009        Num.     Número do RVajustado
+              022          029         008        Num.     Data do ajuste (DDMMAAAA)
+              030          044         015      9(13)V99   Valor do ajuste
+              045          045         001        Alfa     D (Débito)
+              046          047         002        Num.     Motivo do ajuste (cód. da tabela III)
+              048          075         028        Alfa     Motivo do ajuste (string - tabelaIII)
+              076          091         016        Num.     Número do cartão
+              092          099         008        Num.     Data da transação“CV” (DDMMAAAA)
+              100          108         009        Num.     Número do RVoriginal
+              109          123         015        Alfa     Número de referência da carta/fax
+              124          131         008        Num.     Data da carta (DDMMAAAA)
+              132          137         006        Num.     Mês de referência (serviços, POSetc.) (MMAAAA)
+              138          146         009        Num.     Nº-PVoriginal
+              147          154         008        Alfa     Data RVoriginal (DDMMAAAA)
+              155          169         015      9(13)V99   Valor da transação
+              170          170         001        Alfa     D (Desagendamento) ou N (Net)
+              171          178         008        Num.     Data do crédito (DDMMAAAA)
+              179          193         015      9(13)V99   Novo valor da parcela
+              194          208         015      9(13)V99   Valor original da parcela
+              209          223         015      9(13)V99   Valor bruto do resumo de vendasoriginal
+              224          238         015      9(13)V99   Valor do cancelamento solicitado
+              239          250         012        Num.     Número do NSU (motivos 16, 18 e23)
+              251          256         006        Alfa     Número da autorização
+              257          257         001        Alfa     Tipo de débito
+              258          268         011        Num.     Número da Ordem de Débito
+              269          283         015      9(13)V99   Valor do débito total
+              284          298         015      9(13)V99   Valor pendente
+              299          299         001        Alfa     Bandeira do RVde origem (2)
+              300          300         001        Alfa     Bandeira do RVajustado (2)
+
+
+
+                       Quando o registro for uma demonstração do desagendamento,
+                       não serão preenchidos os campos a partir da posição 257.
+
+                       O registro 35 deverá ser enviado com os registros 34, 36 e 43.
+Extrato Eletrônico - Especificação Técnica                                                                            9
+
+
+
+
+                                             Critérios de edição dos dados
+
+      Tipo do registro                             “035” = Lançamentos de ajuste
+                                                   Código do ponto de venda que sofreu o ajuste (quando for Net) ou
+      Número do PVajustado
+                                                   que está sofrendo o desagendamento (casos de desagendamento)
+                                                   Número do RVque sofreu o ajuste (quando for Net) ou queestá
+      Número do RVajustado
+                                                   sofrendo o desagendamento (casos de desagendamento)
+      Data do ajuste                               Data do processamento do ajuste noresumo
+      Valor do ajuste                              Valor do lançamento a ser realizado (Net)
+      D (Débito)                                   Valor do desagendamento realizado na parcela do resumo
+      Motivo do ajuste                             Indicador de débito
+      Motivo do ajuste(String)                     Identifica o motivoque originou o ajuste
+      Número do cartão                             (ver tabela III)
+      Data da transação                            Identifica a descrição do motivo que originou oajuste
+                                                   Cartão original da transação – somenteserá
+      Número do RVoriginal
+                                                   demonstrado em casos de chargeback
+                                                   Número de referência da carta desolicitação
+      Número de referência
+                                                   de cancelamento de vendas
+                                                   Data da carta enviada pelo estabelecimento
+      Data da carta
+                                                   para solicitação de cancelamento de vendas
+      Mês de referência                            Formato MMAAAA – Somente para serviços, POSetc.
+      Número do PVoriginal                         Nº-do PVoriginal datransação
+      Data RVoriginal                              Data do RVoriginal
+      Valor da transação                           Valor da transação (CV)
+                                                   Para os casos de desagendamento será demonstrado
+      D (Desagendamento) ou N (Net)
+                                                   “D” e para os casos de Net“N”
+      Data do crédito                              Data do crédito da parcela que está sofrendo o desagendamento
+      Novo valor da parcela                        Valor ajustado da parcela que está sofrendo o desagendamento
+      Valor original da parcela                    Valor original da parcela que está sofrendo o desagendamento
+      Valor bruto do resumo                        Valor do resumo original
+      Valor do cancelamento solicitado             Valor do cancelamento solicitado
+      Número do NSU (motivos 16, 18 e23)           Número do comprovante da transação original(NSU)
+      Número da autorização                        Número da autorização
+      Tipo de débito                               Tipo de débito – (T) total ou (P)parcial
+      Número da Ordem de Débito                    Número da Ordem de Débito
+      Valor do débito total                        Valor do débito total
+      Valor do pendente                            Valor pendente
+      Bandeira do RVorigem                         Identifica a bandeira do cartão referente ao RVde origem
+      Bandeira do RVajustado                       Identifica a bandeira do cartão referente ao RVajustado
+Extrato Eletrônico - Especificação Técnica                                                                     10
+
+
+
+                              Registro 053 - Ajustes NET e desagendamentos (e-commerce) 7
+
+              Início           Fim       Tam.           Pic      Descrição
+                 1              3          3           Num.      Tipo de registro (“053”)
+                 4              19        16           Num.      Número do Cartão
+                 20             27         8           Num.      Data da Transação“CV”
+                 28             36         9           Num.      Número do RVoriginal
+                 37             45         9           Num.      Nº PVOriginal
+                 46             60        15          9(13)V99   Valor da transação
+                 61             72        12           Num.      Número do NSU (motivos 16, 18 e23)
+                 73             78         6            Alfa     Número da autorização
+                 79             98        20            Alfa     TID
+                 99            128        30            Alfa     Número Pedido
+
+
+                                               Critérios de edição dos dados
+
+           Tipo do registro                               “053” = Lançamentos de ajuste
+                                                          Cartão original da transação – somenteserá
+           Número do Cartão
+                                                          demonstrado em casos de Chargeback.
+           Data da Transação                              Dataemquefoirealizadaavendaqueestásendoajustada
+           Número do RVOriginal                           Numero do RVem que foi submetidaTransação.
+           Número do PVOriginal                           Número do PVOriginal
+           Valor do Transação                             Valor da transação (CV)
+           Número do NSU (motivos 16, 18 e23)             Número do comprovante da transação original(NSU)
+           Número da autorização                          Número da autorização
+           TID                                            Númerodocomprovantedevendasrealizadasnoe-commerce.
+           Número do Pedido                               Número do RVque originou ocrédito
+
+
+                                                Registro 036 –Antecipações
+
+              Início           Fim       Tam.           Pic      Descrição
+                 001           003        003          Num.      Tipo de registro (“036”)
+                 004           012        009          Num.      Número do PV
+                 013           023        011          Num.      Número do documento
+                 024           031        008          Num.      Data do lançamento(DDMMAAAA)
+                 032           046        015         9(13)V99   Valor do lançamento
+                 047           047        001           Alfa     C(Crédito)
+                 048           050        003          Num.      Banco
+                 051           056        006          Num.      Agência
+                 057           067        011          Num.      Conta-corrente
+                 068           076        009          Num.      Número do RVcorrespondente
+                 077           084        008          Num.      Data do RVcorrespondente (DDMMAAAA)
+                 085           099        015         9(13)V99   Valor do crédito original
+                 100           107        008          Num.      Data do vencimento original(DDMMAAAA)
+                 108           112        005           Alfa     Número da parcela/total
+                 113           127        015         9(13)V99   Valor bruto
+                 128           142        015         9(13)V99   Valor da taxa de desconto
+                 143           151        009          Num.      Nº-PVoriginal
+                 152           152        001           Alfa     Bandeira
+Extrato Eletrônico - Especificação Técnica                                                                        11
+
+
+
+
+                                              Critérios de edição dos dados
+
+         Tipo do registro                             “036” = Antecipações de resumos de vendas
+         Número do PV                                 Código do ponto devenda
+         Número do documento                          Número da Ordem de Crédito
+         Data do lançamento                           Data que será realizado o lançamento no domicíliobancário
+         Valor do lançamento                          Valor do lançamento a ser realizado
+         C(Crédito)                                   Indicador de crédito
+         Banco                                        Código de registro do banco no BancoCentral
+         Agência                                      Prefixo da agência
+         Conta-corrente                               Número da conta-corrente
+         Número RVcorrespondente                      Número do RVque originou ocrédito
+         Data do RVcorrespondente
+                                                      Data do RVno formatoDDMMAAAA
+         (DDMMAAAA)
+         Valor do crédito original                    Valor do lançamento da Ordem de Crédito original
+                                                      Data do vencimento da Ordem de Créditooriginal,
+         Data do vencimento original
+                                                      no formato DDMMAAAA
+                                                      Número da parcela que serácreditada,
+         Número da parcela
+                                                      caso seja um resumo parcelado
+         Valor bruto                                  Valor bruto do RV
+         Valor da taxa de desconto                    Valor da taxa de desconto (taxa administrativa)
+         Número do PVoriginal                         Número do PVque originou ocrédito
+         Bandeira                                     Identifica a bandeira do cartão
+
+
+
+
+                                        Registro 037 – Totalizador de créditos
+
+             Início         Fim        Tam.          Pic      Descrição
+              001            003       003          Num.      Tipo de registro (“037”)
+              004            012       009          Num.      Número do PV
+              013            019       007           Alfa     Brancos
+              020            027       008          Num.      Data do crédito (DDMMAAAA)
+              028            042       015         9(13)V99   Valor total do crédito
+              043            043       001           Alfa     Brancos
+              044            046       003          Num.      Número do banco
+              047            052       006          Num.      Número da agência
+              053            063       011          Num.      Número da conta-corrente
+              064            071       008          Num.      Data da geração do arquivo (DDMMAAAA)
+              072            079       008          Num.      Data do crédito antecipado(DDMMAAAA)
+              080            094       015         9(13)V99   Valor total dos créditos antecipados
+Extrato Eletrônico - Especificação Técnica                                                                      12
+
+
+
+                                            Critérios de edição dos dados
+
+          Tipo do registro                                “037” =Totalizador de créditos
+          Número do PV                                    Código do ponto devenda
+          Data do crédito (DDMMAAAA)                      Data do crédito
+          Valor total dos créditos                        Valor total dos créditos normais
+          Banco                                           Código de registro do banco no BancoCentral
+          Agência                                         Prefixo da agência
+          Conta-corrente                                  Número da conta-corrente
+          Data do movimento (DDMMAAAA)                    Dataemqueo movimentofoiprocessadopelaRede
+          Data do crédito antecipado(DDMMAAAA)            Data do crédito dasantecipações
+                                                          Valor total dos créditos efetuadospelas
+          Valor total dos créditos antecipados
+                                                          antecipações de resumos de vendas
+
+
+
+                                     Registro 038 - Ajustes a débito (via banco)
+
+              Início          Fim          Tam.         Pic       Descrição
+               001            003           003        Num.       Tipo de registro (“038”)
+               004            012           009        Num.       Número do PV
+               013            023           011        Num.       Número do documento
+               024            031           008        Num.       Data da emissão (DDMMAAAA)
+               032            046           015       9(13)V99    Valor do débito
+               047            047           001         Alfa      D (Débito)
+               048            050           003        Num.       Banco
+               051            056           006        Num.       Agência
+               057            067           011        Num.       Conta-corrente
+               068            076           009        Num.       Número do RVoriginal
+               077            084           008        Num.       Data RVoriginal (DDMMAAAA)
+               085            099           015       9(13)V99    Valor do crédito original
+               100            101           002        Num.       Motivo do débito (cód. da tabela itemIII)
+               102            129           028       9(13)V99    Motivo do débito (String - tabela item III)
+               130            145           016        Num.       Número do cartão
+               146            160           015         Alfa      Número de referência da carta/fax
+               161            166           006        Num.       Mês de referência (DDMMAAAA)       
+               167            174           008        Num.       Data da carta
+               175            189           015       9(13)V99    Valor do cancelamento solicitado
+               190            204           015        Num.       Número do processo
+               205            213           009        Num.       Nº-PVoriginal
+               214            221           008        Num.       Data da transação“CV” (DDMMAAAA)
+               222            233           012        Num.       Número do NSU (motivos 16, 18 e23)
+               234            242           009        Num.       Número do resumo do débito
+               243            250           008        Num.       Data do débito (DDMMAAAA)
+               251            265           015       9(13)V99    Valor da transação original
+               266            271           006        Num.       Número da autorização
+               272            272           001         Alfa      Tipo de débito
+               273            287           015       9(13)V99    Valor do débito total
+               288            302           015       9(13)V99    Valor pendente
+               303            303           001         Alfa      Bandeira do RVde origem (2)
+Extrato Eletrônico - Especificação Técnica                                                                       13
+
+
+
+
+                                             Critérios de edição dos dados
+
+      Tipo do registro                             “038” = Ajustes a débito(via banco)
+      Número do PV                                 Código do Ponto de Venda que está sofrendo odébito
+      Número do documento                          Número da Ordem Débito
+      Data da emissão                              Data da emissão do débito
+      Valor do débito                              Valor do lançamento a ser realizado
+      D (débito)                                   Indicador de débito
+      Número do banco                              Código de registro do banco no BancoCentral
+      Número da agência                            Prefixo da agência
+      Número da conta-corrente                     Número da conta-corrente
+      Número do RVoriginal                         Número do RVem que foi submetidatransação
+      Data RVoriginal                              Data do RVoriginal
+      Valor do crédito original                    Valor do crédito original
+      Motivo do débito (código)                    Identifica o motivo que originou o débito (ver tabela III)
+      Motivo do débito (String)                    Identifica a descrição do motivo que originou odébito
+                                                   Cartão original da transação – somente serádemonstrado
+      Número do cartão
+                                                   em casos de chargeback
+      Número de referência                         Número da carta de solicitação de cancelamento devendas
+      Mês de referência                            Formato MMAAAA – Somente para serviços, POSetc.
+                                                   Data da carta enviada pelo estabelecimento para solicitação
+      Data da carta
+                                                   de cancelamento de vendas
+      Valor do cancelamento                        Valor solicitado pelo estabelecimento paracancelamento
+      Número do processo                           Número do processo de chargeback
+      Número do PVoriginal                         Código do ponto de venda que originou o débito
+      Data da transação                            Data em que foi realizada a venda que causou o débito
+      Número do NSU (motivos 16, 18 e23)           Número do comprovante da transação original(NSU)
+      Número do resumo do débito                   Número do resumo gerado para o débito
+      Data do débito                               Data que o débito está sendoefetuado
+      Valor da transação original                  Valor bruto da transaçãocapturada
+      Número da autorização                        Número da autorização
+      Tipo de débito                               Tipo de débito – (T) Total ou (P)Parcial
+      Valor do débito total                        Valor do débito total
+      Valor do pendente                            Valor pendente
+      Bandeira do RVorigem                         Identifica a bandeira do cartão referente ao RVde origem
+Extrato Eletrônico - Especificação Técnica                                                                           14
+
+
+
+
+                                  Registro 054 - Ajustes a Débito (via Banco) - (e-commerce)
+
+             Início           Fim           Tam.           Pic      Descrição
+                1             3              3            Num.      Tipo de registro (“054”)
+                4             12             9            Num.      Número do RVoriginal
+                13            28             16           Num.      Número do Cartão
+                29            37             9            Num.      Nº PVOriginal
+                38            45             8            Num.      Data da Transação“CV”
+                46            57             12           Num.      Número do NSU (motivos 16, 18 e23)
+                58            72             15           Num.      Valor da transação original
+                73            78             6            Num.      Número da autorização
+                79            98             20           Alfa      TID
+                99            128            30           Alfa      Número do Pedido
+
+
+
+
+                                                  Critérios de edição dos dados
+
+          Tipo do registro                                   “054” = Ajustes a débito(via Banco)
+          Número do RVOriginal                               Numero do RVem que foi submetidaTransação.
+                                                             Cartão original da transação – somenteserá
+          Número do Cartão
+                                                             demonstrado em casos de Chargeback.
+          Número do PVOriginal                               Código do Ponto de Venda que originou odébito
+          Data da Transação                                  Data em que foi realizada a venda que causou o débito
+          Número do NSU (motivos 16, 18 e23)                 Número do Comprovante da transação original ( NSU)
+          Valor da transação original                        Valor bruto da transaçãocapturada
+          Número da autorização                              Número da autorização
+                                                             Número do comprovante de vendasrealizadas
+          TID
+                                                             pelo e-commerce
+          Número Pedido                                      Número atribuído no momento dacompra
+
+
+
+
+                                                      Registro 040 –Serasa
+
+             Início           Fim           Tam.           Pic      Descrição
+                001           003           003           Num.      Tipo de registro (“040”)
+                004           012           009           Num.      Número do PV
+                013           017           005           Num.      Quantidade de consultas realizadas no período
+                018           032           015          9(13)V99   Valor total das consultas no período
+                033           040           008           Num.      Início do período da consulta(DDMMAAAA)
+                041           048           008           Num.      Fim do período da consulta (DDMMAAAA)
+                049           063           015          9(13)V99   Valor por consulta deste período
+Extrato Eletrônico - Especificação Técnica                                                                        15
+
+
+
+
+                                             Critérios de edição dos dados
+
+          Tipo do registro                                “040” = Serasa
+          Número do PV                                    Código do ponto devenda
+          Quant. consultas realizadas                     Quantidade de consultas realizadas no período
+          Valor total dos consultas                       Valor total das consultas no período
+          Início da consulta (DDMMAAAA)                   Início da consulta deste período
+          Fim da consulta (DDMMAAAA)                      Fim da consulta deste período
+          Valor por consulta                              Valor por consulta no período
+
+
+
+                                                     Registro 041 -AVS
+
+             Início            Fim       Tam.           Pic       Descrição
+              001              003        003          Num.       Tipo de registro (“041”)
+              004              012        009          Num.       Número do PV
+              013              017        005          Num.       Quantidade de consultas realizadas no período
+              018              032        015         9(13)V99    Valor total das consultas no período
+              033              040        008          Num.       Início do período da consulta(DDMMAAAA)
+              041              048        008          Num.       Fim do período da consulta (DDMMAAAA)
+              049              063        015         9(13)V99    Valor por consulta deste período
+
+
+
+                                                Critérios de edição dos dados
+
+           Tipo do registro                                “041” = AVS
+           Número do PV                                    Código do ponto devenda
+           Quant. consultas realizadas                     Quantidade de consultas realizadas no período
+           Valor total dos consultas                       Valor total das consultas no período
+           Início da consulta (DDMMAAAA)                   Início da consulta deste período
+           Fim da consulta (DDMMAAAA)                      Fim da consulta deste período
+           Valor por consulta                              Valor por consulta no período
+
+
+
+                                                 Registro 042 -SecureCode
+
+              Início            Fim       Tam.           Pic      Descrição
+               001              003        003          Num.      Tipo de registro (“042”)
+               004              012        009          Num.      Número do PV
+               013              017        005          Num.      Quantidade de consultas realizadas no período
+               018              032        015         9(13)V99   Valor total das consultas no período
+               033              040        008          Num.      Início do período da consulta(DDMMAAAA)
+               041              048        008          Num.      Fim do período da consulta (DDMMAAAA)
+               049              063        015         9(13)V99   Valor por consulta deste período
+                64              64         001           Alfa     Bandeira
+Extrato Eletrônico - Especificação Técnica                                                                                16
+
+
+
+
+                                                Critérios de edição dos dados
+
+           Tipo do registro                                 “042” = SecureCode
+           Número do PV                                     Código do ponto devenda
+           Quant. consultas realizadas                      Quantidade de consultas realizadas no período
+           Valor total dos consultas                        Valor total das consultas no período
+           Início da consulta (DDMMAAAA)                    Início da consulta deste período
+           Fim da consulta (DDMMAAAA)                       Fim da consulta deste período
+           Valor por consulta                               Valor por consulta no período
+
+
+
+                                Registro 043 - Ajustes a crédito (Extrato Eletrônico Financeiro)
+
+              Início            Fim         Tam.          Pic       Descrição
+               001              003          003         Num.       Tipo de registro (“043”)
+               004              012          009         Num.       Número do PVcreditado
+               013              021          009         Num.       Número do resumo do crédito
+               022              032          011         Num.       Número do documento
+               033              040          008        9(13)V99    Data da emissão (DDMMAAAA)
+               041              048          008        9(13)V99    Data do crédito (DDMMAAAA)
+               049              063          015        9(13)V99    Valor do crédito
+               064              064          001         Num.       C(Crédito)
+               065              067          003         Num.       Banco
+               068              073          006         Num.       Agência
+               074              084          011          Alfa      Conta-corrente
+               085              086          002         Num.       Motivo do crédito (cód. da tabelaIII)
+               087              114          028          Alfa      Motivo do crédito(String)
+               115              115          001          Alfa      Bandeira
+
+
+                                                Critérios de edição dos dados
+
+           Tipo do registro                                 “043” = Ajustea crédito
+           Número do PV                                     Código do ponto de venda que está sendocreditado
+           Número do resumo de crédito                      Número do resumo gerado para o crédito
+           Número do documento                              Número da Ordem de Crédito
+           Data da emissão                                  Data da emissão da Ordem de Crédito
+           Data do crédito                                  Data do lançamento do crédito
+           Valor do crédito                                 Valor do lançamento a ser realizado
+           C(Crédito)                                       Indicador de crédito
+           Número do banco                                  Código de registro do banco no BancoCentral
+           Número da agência                                Prefixo da agência
+           Número da conta-corrente                         Número da conta-corrente
+           Motivo do crédito                                Código de ajuste (ver tabela III)
+           Motivo do crédito(String)                        Identifica o motivo que originou o crédito (ver tabela III)
+           Bandeira                                         Identifica a bandeira do cartão
+Extrato Eletrônico - Especificação Técnica                                                         17
+
+
+
+
+                                        Registro 044 - Débitos pendentes
+
+             Início       Fim         Tam.         Pic     Descrição
+              001          003         003        Num.     Tipo de registro (“044”)
+              004          012         009        Num.     Número do PV
+              013          023         011        Num.     Número da Ordem de Débito
+              024          031         008        Num.     Data da OD (DDMMAAAA)
+              032          046         015      9(13)V99   Valor da OD
+              047          048         002        Num.     Motivo do ajuste (cód. da tabela III)
+              049          076         028        Alfa     Motivo do ajuste (String – tabelaIII)
+              077          092         016        Num.     Número do cartão
+              093          104         012        Num.     Número do NSU (motivos 16, 18 e23)
+              105          112         008        Num.     Data do CVoriginal datransação
+              113          118         006        Alfa     Número da autorização
+              119          133         015      9(13)V99   Valor da transação original
+              134          142         009        Num.     Número do RVoriginal
+              143          150         008        Num.     Data RVoriginal
+              151          159         009        Num.     Número do PVoriginal
+              160          174         015        Alfa     Número de referência da carta/fax
+              175          182         008        Num.     Data da carta
+              183          197         015        Num.     Número do processo de chargeback
+              198          203         006        Num.     Mês de referência (serviços, POSetc.)
+              204          218         015      9(13)V99   Valor compensado/pago
+              219          226         008        Num.     Data do pagamento
+              227          241         015      9(13)V99   Valor pendente de débito
+              242          256         015        Num.     Número de processo de retenção
+              257          258         002        Num.     Meio de compensação (código)
+              259          286         028        Alfa     Meio de compensação (String)
+              287          287         001        Alfa     Identifica abandeira
+Extrato Eletrônico - Especificação Técnica                                                                                 18
+
+
+
+                                                   Critérios de edição dos dados
+           Tipo do registro                                   “044” = Débitos pendentes
+           Número do PV                                       Código do ponto de vendaajustado
+           Número da Ordem de Débito                          Número da Ordem de Débito
+           Data da Ordem de Débito                            Data da OD
+           Valor do ajuste                                    Valor total da OD
+           Motivo do ajuste                                   Identifica o motivo que originou o ajuste (ver tabela III)
+           Motivo do ajuste(String)                           Identifica a descrição do motivo que originou oajuste
+                                                              Cartão original da transação somente serádemonstrado
+           Número do cartão
+                                                              em casos de chargeback e cancelamento
+           Número do NSU (motivos 16, 18 e23)                 Número do comprovante da transação original(NSU)
+           Data do CV/NSU original da transação               Data do CV/NSU original da transação
+           Número da autorização                              Autorização do emissor/bandeira
+           Valor da transação original                        Valor transação original
+           Número do RVoriginal                               Número do RVoriginal
+           Data RVoriginal                                    Data do RVoriginal
+           Número do PVoriginal                               Número do PVoriginal
+           Número da carta de referência/fax                  Número da carta de referência/fax
+                                                              Data da carta enviada pelo estabelecimento para a
+           Data da carta de cancelamento
+                                                              solicitação do cancelamento devendas
+           Número do processo                                 Número do processo de chargeback
+           Mês de referência                                  Mês de referência (serviços, POSetc.)
+           Valor compensado/pago                              Valor já compensado/pago
+           Data da compensação                                Data da compensação
+           Valor pendente                                     Valor em aberto
+           Número do processoRET                              Número do processo de retenção
+           Meio de compensação                                Identifica o meio que foicompensado
+           Meio de compensação                                Identifica a descrição do meio que foi compensado
+           Bandeira                                           Identifica a bandeira do cartão
+
+
+                                      Registro 055 - Débitos Pendentes - (e-commerce)
+
+              Início           Fim         Tam.             Pic       Descrição
+                1              3               3           Num.       Tipo de registro (“055”)
+                4              19           16             Num.       Número do Cartão
+                20             31           12             Num.       Número do NSU (motivos 16, 18 e23)
+                32             39              8           Num.       Data do CVoriginal datransação
+                40             45              6            Alfa      Número da Autorização
+                46             60           15            9(13)V99    Valor da transação Original
+                61             69              9           Num.       Número do RVoriginal
+                70             78              9           Num.       Número do PVOriginal
+                79             98           20              Alfa      TID
+                99             128          30              Alfa      Número Pedido
+Extrato Eletrônico - Especificação Técnica                                                                       19
+
+
+
+
+                                               Critérios de edição dos dados
+
+           Tipo do registro                               “055” = Débitos Pendentes
+                                                          Cartão original da transação somente serádemonstrado
+           Número do Cartão
+                                                          em casos de chargeback e cancelamento
+           Número do NSU (motivos 16,18 e23)              Número do Comprovante da transação original ( NSU)
+           Data do CV/ NSUoriginal da transação           Data do CV/ NSUoriginal da transação
+           Número da Autorização                          Autorização do emissor / bandeira
+           Valor da TransaçãoOriginal                     Valor TransaçãoOriginal
+           Número do RVOriginal                           Número do RVOriginal
+           Número do PVOriginal                           Número do PVOriginal
+                                                          Número do comprovante de vendasrealizadas
+           TID
+                                                          pelo e-commerce
+           Número do Pedido                               Número atribuído no momento dacompra
+
+
+
+
+                                           Registro 045 - Débitos liquidados
+
+              Início          Fim       Tam.            Pic      Descrição
+                 001          003        003           Num.      Tipo de registro (“045”)
+                 004          012        009           Num.      Número do PV
+                 013          023        011           Num.      Número da Ordem de Débito
+                 024          031        008           Num.      Data da OD (DDMMAAAA)
+                 032          046        015          9(13)V99   Valor da OD
+                 047          048        002           Num.      Motivo do ajuste (cód. da tabela III)
+                 049          076        028            Alfa     Motivo do ajuste (String – tabelaIII)
+                 077          092        016           Num.      Número do cartão
+                 093          104        012           Num.      Número do NSU (motivos 16, 18 e23)
+                 105          112        008           Num.      Data do CVoriginal datransação
+                 113          118        006            Alfa     Número da autorização
+                 119          133        015          9(13)V99   Valor da transação original
+                 134          142        009           Num.      Número do RVoriginal
+                 143          150        008           Num.      Data RVoriginal
+                 151          159        009           Num.      Número do PVoriginal
+                 160          174        015            Alfa     Número de referência da carta/fax
+                 175          182        008           Num.      Data da carta
+                 183          197        015           Num.      Número do processo de chargeback
+                 198          203        006           Num.      Mês de referência (serviços, POSetc.)
+                 204          218        015          9(13)V99   Valor liquidado
+                 219          226        008           Num.      Data da liquidação
+                 227          241        015            Alfa     Número de processo de retenção
+                 242          243        002           Num.      Meio de compensação (código)
+                 244          271        028            Alfa     Meio de compensação (String)
+                 272          272        001            Alfa     Identifica abandeira
+Extrato Eletrônico - Especificação Técnica                                                                                 20
+
+
+
+
+                                                   Critérios de edição dos dados
+
+           Tipo do registro                                   “045” = Débitos liquidados
+           Número do PVajustado                               Código do ponto de vendaajustado
+           Número da Ordem de Débito                          Número da Ordem de Débito
+           Data da Ordem de Débito                            Data da OD
+           Valor total do débito                              Valor total da OD
+           Motivo do ajuste                                   Identifica o motivo que originou o ajuste (ver tabela III)
+           Motivo do ajuste(String)                           Identifica a descrição do motivo que originou oajuste
+                                                              Cartão original da transação somente serádemonstrado
+           Número do cartão
+                                                              em casos de chargeback e cancelamento
+           Número do NSU (motivos 16, 18 e23)                 Número do comprovante da transação original(NSU)
+           Data do CV/NSU original da transação               Data do CV/NSU original da transação
+           Número da autorização                              Autorização do emissor/bandeira
+           Valor da transação original                        Valor transação original
+           Número do RVoriginal                               Número do RVoriginal
+           Data RVoriginal                                    Data do RVoriginal
+           Número do PVoriginal                               Número do PVoriginal
+           Número da carta de referência/fax                  Número da carta de referência/fax
+                                                              Data da carta enviada pelo estabelecimento para a
+           Data da carta de cancelamento
+                                                              solicitação do cancelamento devendas
+           Número do processo                                 Número do processo de chargeback
+           Mês de referência                                  Mês de referência (serviços, POSetc.)
+           Valor compensado/pago                              Valor liquidado
+           Data da liquidação                                 Data em que foi liquidado odébito
+           Número do processoRET                              Número do processo de retenção
+           Meio de compensação                                Identifica o meio que foicompensado
+           Bandeira                                           Identifica a bandeira do cartão
+
+
+
+                                      Registro 056 - Débitos Liquidados - (e-commerce)
+
+              Início           Fim         Tam.             Pic       Descrição
+                1               3              3           Num        Tipo de registro (“056”)
+                4               19          16             Num        Número do Cartão
+                20              31          12             Num        Número do NSU (motivos 16, 18 e23)
+                32              39             8           Num        Data do CVoriginal datransação
+                40              45             6            Alfa      Número da Autorização
+                46              60          15            9(13)V99    Valor da transação Original
+                61              69             9           Num        Número do RVoriginal
+                70              78             9           Num        Número do PVOriginal
+                79              98          20              Alfa      TID
+                99             128          30              Alfa      Número do pedido
+Extrato Eletrônico - Especificação Técnica                                                                       21
+
+
+
+
+                                               Critérios de edição dos dados
+
+           Tipo do registro                               “056” = Débitos Liquidados
+                                                          Cartão original da transação somente serádemonstrado
+           Número do Cartão
+                                                          em casos de chargeback e cancelamento
+           Número do NSU (motivos 16,18 e23)              Número do Comprovante da transação original ( NSU)
+           Data do CV/ NSUoriginal da transação           Data do CV/ NSUoriginal da transação
+           Número da Autorização                          Autorização do emissor / bandeira
+           Valor da TransaçãoOriginal                     Valor TransaçãoOriginal
+           Número do RVOriginal                           Número do RVOriginal
+           Número do PVOriginal                           Número do PVOriginal
+                                                          Número do comprovante de vendasrealizadas
+           TID
+                                                          pelo e-commerce
+           Número do Pedido                               Número atribuído no momento dacompra
+
+
+
+
+                                        Registro 049 - Desagendamento de parcelas
+
+              Início          Fim         Tam.          Pic      Descrição
+                 001          003          003         Num.      Tipo de registro (“049”)
+                 004          012          009         Num.      Número do PVoriginal
+                 013          021          009         Num.      Número do RVoriginal
+                 022          036          015         Alpha     Número de referência
+                 037          044          008         Num.      Data do crédito (DDMMAAAA)
+                 045          059          015        9(13)V99   Novo valor da parcela
+                 060          074          015        9(13)V99   Valor original da parcela alterada
+                 075          089          015        9(13)V99   Valor do ajuste
+                 090          097          008         Num.      Data do cancelamento (DDMMAAAA)
+                 098          112          015        9(13)V99   Valor do RVoriginal
+                 113          127          015        9(13)V99   Valor do cancelamento solicitado
+                 128          143          016         Num.      Número do cartão
+                 144          151          008         Num.      Data da transação (DDMMAAAA)
+                 152          163          012         Num.      NSU
+                 164          164          001         Num.      Tipo de débito
+                 165          166          002         Num.      Número da parcela
+                 167          167          001          Alfa     Bandeira do RVde origem
+Extrato Eletrônico - Especificação Técnica                                                                          22
+
+
+
+
+                                                      Critérios de edição dos dados
+
+           Tipo do registro                                      “049” = Desagendamento de parcelas
+           Número do PVoriginal                                  Código do PVque originou oajuste
+           Número do RVoriginal                                  Número do resumo que originou oajuste
+                                                                 Número da carta de solicitação
+           Número do documento
+                                                                 de cancelamento de vendas
+           Data da emissão                                       Data da emissão da Ordem de Crédito
+           Data do crédito                                       Data do crédito da parcelaalterada
+           Novo valor da parcela                                 Valor ajustado da parcela
+           Valor original da parcela alterada                    Valor original da parcela
+           Valor do Ajuste                                       Valor que está sendo ajustado
+           Data do cancelamento                                  Data de processamento do cancelamento
+           Valor do RVoriginal                                   Valor do resumo de vendas original
+                                                                 Valor total do cancelamento solicitadopelo
+           Valor do cancelamento solicitado
+                                                                 estabelecimento
+           Número do cartão                                      Número do cartão
+           Data da transação                                     Data da transação
+           NSU                                                   Número do comprovante da transação original(NSU)
+                                                                 1 = caso de ajuste de cancelamento 18 ou16
+                                                                 (cancelamento via estabelecimento)
+           Tipo do débito
+                                                                 2 = caso de ajuste de cancelamento23
+                                                                 (cancelamento via emissor)
+                                                                 Número da parcela que está sofrendo
+           Número da parcela
+                                                                 o desagendamento
+                                                                 Identifica a bandeira do cartão referente
+           Bandeira do RVorigem
+                                                                 ao RVde origem
+
+
+
+                                 Registro 057 - Desagendamento de Parcelas (e-commerce)
+
+              Início           Fim              Tam.           Pic       Descrição
+                 1               3               3            Num        Tipo de registro (“057”)
+                 4             12                9            Num        Número do PVoriginal
+                 13            21                9            Num        Número do RVoriginal
+                 98            112               15          9(13)V99    Valor do RVoriginal
+               128             143               16           Num        Número do cartão
+               144             151               8            Num        Data da transação
+               152             163               12           Num        NSU
+               165             166               20            Alfa      TID
+               167             196               30            Alfa      Número do pedido
+Extrato Eletrônico - Especificação Técnica                                                                        23
+
+
+
+
+                                                 Critérios de edição dos dados
+
+           Tipo do registro                                  “057” = Desagendamento de parcelas
+           Número do PVoriginal                              Código do PVque originou oajuste
+           Número do RVoriginal                              Número do Resumo que originou oajuste
+           Valor do RVOriginal                               Valor do Resumo de Vendasoriginal
+           Número do Cartão                                  Número do cartão
+           Data da Transação                                 Data da transação
+           NSU                                               Número do Comprovante da transação original ( NSU)
+                                                             Número do comprovante de vendasrealizadas
+           TID
+                                                             pelo e-commerce
+           Número do Pedido                                  Número atribuído no momento dacompra
+
+
+
+                                               Registro 050 - Totalizador - Matriz
+
+              Início           Fim            Tam.         Pic      Descrição
+                 001           003            003         Num.      Tipo de registro (“050”)
+                 004           012            009         Num.      Nº PVmatriz
+                 013           018            006         Num.      Quantidade total de resumosmatriz
+                 019           033            015       9(13)V99    Valor total dos créditos normais
+                 034           039            006         Num.      Quantidade de créditos antecipados
+                 040           054            015       9(13)V99    Valor total antecipado
+                 055           058            004         Num.      Quantidade de ajustes acrédito
+                 059           073            015       9(13)V99    Valor total de ajustes a crédito
+                 074           079            006         Num.      Quantidade de ajustes adébito
+                 080           094            015       9(13)V99    Valor total de ajustes adébito
+
+
+
+                                                 Critérios de edição dos dados
+
+           Tipo do registro                                   “050” =Totalizador matriz
+           Número do PVoriginal                               Código do ponto de vendamatriz
+                                                              Total de créditos normais dos pontos devenda
+           Quantidade de créditos normais namatriz
+                                                              centralizados na matriz
+                                                              Valor total dos créditos normais dosPVs
+           Valor total dos créditos normais
+                                                              centralizados na matriz
+                                                              Total dos créditos antecipados dos PVs
+           Quantidade de créditos antecipados
+                                                              centralizados na matriz
+                                                              Valor total dos créditos antecipados
+           Valor total antecipado
+                                                              dos PVscentralizados namatriz
+                                                              Quantidade de lançamentos a crédito
+           Quantidade de ajustes acrédito
+                                                              realizados para os PVscentralizados na matriz
+                                                              Valor total dos lançamentos a crédito dos
+           Valor total de ajustes a crédito
+                                                              PVscentralizados namatriz
+                                                              Quantidade de lançamentos a débito realizados
+           Quantidade de ajustes adébito
+                                                              para os PVscentralizados na matriz
+                                                              Valor total dos lançamentos a débito dos
+           Valor total de ajustes adébito
+                                                              PVscentralizados namatriz
+Extrato Eletrônico - Especificação Técnica                                                                         24
+
+
+
+
+                                                Registro 052 - Trailer do arquivo
+
+              Início          Fim             Tam.         Pic      Descrição
+               001             003            003         Num.      Tipo de registro (“052”)
+               004             007            004         Num.      Quantidade de matrizes no arquivo
+               008             013            006         Num.      Quantidade de registros no arquivo
+               014             022            009         Num.      Nº PVgrupo
+               023             026            004         Num.      Quantidade total de resumosgrupo
+               027             041            015       9(13)V99    Valor total dos créditos normais
+               042             047            006         Num.      Quantidade de créditos antecipados
+               048             062            015       9(13)V99    Valor total antecipado
+               063             066            004         Num.      Quantidade de ajustes acrédito
+               067             081            015       9(13)V99    Valor total de ajustes a crédito
+               082             085            004         Num.      Quantidade de ajustes adébito
+               086             100            015       9(13)V99    Valor total de ajustes adébito
+
+
+
+
+                                                 Critérios de edição dos dados
+
+           Tipo do registro                                   Tipo do registro“052”= Totalizador grupo
+           Quantidade de matrizes                             Quantidade de matrizes enviadas no arquivo
+                                                              Quantidade total de registros gravados no arquivo,
+           Quantidade de registros
+                                                              incluindo header, trailer e header de grupo
+           Número do PVmatriz                                 Código do ponto de venda dogrupo
+                                                              Total de créditos normais dospontos
+           Quantidade de créditos normais namatriz
+                                                              de venda centralizados no grupo
+                                                              Valor total dos créditos normais
+           Valor total dos créditos normais
+                                                              dos PVscentralizados nogrupo
+                                                              Total dos créditos antecipados
+           Quantidade de créditos antecipados
+                                                              dos PVscentralizados nogrupo
+                                                              Valor total dos créditos antecipadosdos
+           Valor total antecipado
+                                                              PVscentralizados no grupo
+                                                              Quantidade de lançamentos a crédito
+           Quantidade de ajustes acrédito
+                                                              realizados para os PVscentralizados no grupo
+                                                              Valor total dos lançamentos acrédito
+           Valor total de ajustes a crédito
+                                                              dos PVscentralizados no grupo
+                                                              Quantidade de lançamentos a débito realizados
+           Quantidade de ajustes adébito
+                                                              para os PVscentralizados no grupo
+                                                              Valor total dos lançamentos a débito
+           Valor total de ajustes adébito
+                                                              dos PVscentralizados no grupo
+Extrato Eletrônico - Especificação Técnica                                                     25
+
+
+
+
+ 5       Tabelas
+         5.1 Tabela I - Tipos de transação
+
+
+             01 = Àvista
+             02 = Parcelado semjuros
+             03 = ParceladoIATA
+             04 = Rotativodólar
+             05 = CDC
+             06 = Pré-datada
+             07 = Trishop
+             08 = Construcard
+
+
+
+          2 – As transações do tipo parcelado com juros possuem o mesmo prazo de recebimento
+          que àvista.
+
+
+         5.2 Tabela II – Status do crédito
+
+
+             00 = CVOK
+             01 = Aemitir
+             02 = Trânsito
+             03 = Pendentebanco
+             04 = Pendentematriz                  Créditos normais
+             05 = Pendente filial
+             06 = Baixada
+             07 = Trânsito em fita
+             08 = Baixaautomática
+             09 = Baixado para penhora ouretenção
+             11 = Suspenso
+             12 = Penhorado
+             13 = Retido
+Extrato Eletrônico - Especificação Técnica                                26
+
+
+
+
+          5.3 - Tabela III – Ajustes
+
+            1   PACOTEE-REDE                 43 BOLETOBANCARIO
+            2   CONSULTADECHEQUES            44 MENSALIDADECONTROLREDE
+            3   DEBITOPARCELADO              45 RETROATIVOCONTROLREDE
+            4   DEBITOTXTRIBUTO              46 TAXAPARC.ESPECIAL
+            5   TXMAN DOTEF                  48 AL.POS/PINPAD/TX CONECT
+            6   POS-INATIV/CONEC/PIN         49 POS-INATIV/CONEC/PIN
+            7   CREDENC/ADESAO               50 DISPONIVEL
+            8   CANCEL VENDAS HIPERC         51 CREDSECURECODE
+            9   CANCEL/CHBK MAESTRO          52 REVERSAODEBITOCBK
+           10 CANCELAMENTOSPORDISPUTAS       53 CREDITORECARGA
+           11   MENS.SECURECODE              54 TOT.LIQID.AMENOR
+           12 MENSALIDADEHIPERCARD           55 CVN CONSIDERADO RV
+           13 MAQUININHA NO CONTA CERTA      56 PREMIOPROMOÇAOPARCELADO
+           14 TARIFADEBITO                   57 PAGTODESAGIO
+           15 CBKCARTAOCHIP                  58 CREDITOALUGUEL
+           16 ESTORNOCR.INDEV.CI             59 REBATEMENSAL
+           17 INDENIZA POSPERDIDO            60 REBATEFINAL
+           18 CANCEL.DEVENDAS                61 DEVCREDPGTOMAIOR
+           19 SEGUNDA VIA EXTRATO            62 REGULARIZAÇAO DIF.TAXA
+           20 POS-INATIV/CONEC/PIN           63 REGUL.DB ANTERIOR
+           21 CANCELAMENTOMAESTRO            64 PGTODERV
+           22 CONTESTAÇAODEVENDA             65 DEVMENSALHIPERCARD
+           23 CONTESTAÇAODEVENDA             66 PGT.JUROCORREÇAO
+           24 TRFAD EXCESSOCBACK             67 COMISSAO DERECARGA
+           25 PACOTEDESERVICOS               68 BONUSCELULARREDE
+           26 PACOTESERVEXCEDENT             69 PGTOVIAÇAOAEREA
+           27 COFPERFORMACE                  70 ESTORNOPREÇOUNICO
+           28 AL.POS/PINPAD/TX CONECT        71 PGT.NS/J-1APARC
+           29 DEBITORECARGA                  72 PGT.NS/J-2APARC
+           30 CANCEL DESPDOLAR               73 PGT.NS/J-3APARC
+           31 ASSISTENCIA REDE               74 PGT.NS/J-4APARC
+           32 CANCEL VENDA DEBITO            75 PGT.NS/J-5APARC
+           33 PACOTEGATEWAY                  76 PAGTOMANUAL
+           34 MODELOTARIFARIO                77 PGT.NS/J-7APARC
+           35 CONSULTAAVS                    78 PGT.NS/J-8APARC
+           36 DEVOLUÇAOCV                    79 PGT.NS/J-9APARC
+           37 ESTORNOCR.INDEV.               80 CAPTURACVOFF-TO
+           38 COBRETROATTXADM                81 PCTETUR.CREDITO
+           39 CONTESTVENDASHIPER             82 COMISS.SOBREVENDA
+           40 TARIFAEXT.MENSAL               83 IRS/COMISSAO
+           41 MANUAL REVIEW                  84 ADIC.IR ESTAD.
+           42 MONITORING                     85 PGTODERV
+Extrato Eletrônico - Especificação Técnica                                                27
+
+
+
+
+          5.3 - Tabela III – Ajustes                     5.4 - Tabela IV – Produtos
+
+           86   ANTECIPAÇAODOLAR
+                                                            0 = Outrasbandeiras
+           87   DEVOL.CANCEL.DOLAR
+                                                            1 = MasterCard®
+           88   TIERPRICING
+           89   ESTCONS.SERASA/AVS
+                                                            2 = DinersClub
+           90   ESTOR.TARIFAENV.DOC
+                                                            3 = Visa
+           91   ESTORNOPOSPERDIDO                           4 = Cabal
+           92   ESTOR.TAREXTMENSAL                          5 = Hipercard
+           93   EST.EXTSALDOSABER.                          6 = Sorocred
+           94   ESTOR.TAXADEADESAO                          7 = CUP
+           95   ESTAL.POS/TX.CONET                          8 = Cred-System(Mais)
+           96   ESTOR.TAR2ª VIAEXT                          9 = Sicredi
+           97   ESTORNODEDEBITO                             A = Avista
+           98   OFERTAREDE                                  B= Banescard
+           99   DEBITONAOACATADO                            E= Elo
+                                                            J = JCB
+                                                            X = Amex
+                                                            Z = Credz
+
+
+
+ 6        Veículos de troca de arquivos
+         A transmissão dos arquivos será feita por VANShomologadas pela Rede:
+
+         Interchange/GXS                              Mercador/Neogrid
+         business.center@gxs.com
+
+         Para suporte aos fluxos em produção:         vendas.edi@neogrid.com
+         (0xx11) 2167 2600 / 0800 701 7444            (0xx47) 30437376
+
+         Para implantação de novos fluxos:
+         (0xx11) 2536 0000
+
+         TIVIT (Proceda)                               Accesstage
+
+         sup.neg.financeiro@tivit.com.br               comercial@accesstage.com.br
+         (0xx11) 3626 6700                             (0xx11) 3549 6570 / 0800 7736633
+
+
+
+         Nexxera                                       Software Express
+
+         comercial.nexxbusiness@nexxera.com            comercial@softwareexpress.com.br
+         (0xx11) 2121 9600/2121 9665/98494 4499        (0xx11) 3170 5354
+

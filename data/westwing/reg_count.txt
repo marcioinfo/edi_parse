@@ -1,0 +1,41 @@
+(edi) antonio@dev12:~/edi/data/westwing$ cut -c -3 eevcs.txt | sort | uniq -c
+     33 002
+     33 004
+     16 005
+    159 006
+    585 008
+    303 010
+      6 011
+  20249 012
+   1761 014
+     33 026
+     33 028
+    492 034
+  20144 035
+(edi) antonio@dev12:~/edi/data/westwing$ cut -c -3 eefis.txt | sort | uniq -c
+     31 030
+     20 032
+     12 034
+   6141 035
+   1907 036
+     32 037
+      7 038
+    155 040
+      1 043
+   5839 044
+   5541 045
+    557 049
+     20 050
+     31 052
+   6140 053
+   5837 055
+   5533 056
+    557 057
+(edi) antonio@dev12:~/edi/data/westwing$ cut -d ',' -f1 eevds.txt | sort | uniq -c
+     31 00
+     43 01
+     27 02
+     27 03
+     31 04
+     77 05
+

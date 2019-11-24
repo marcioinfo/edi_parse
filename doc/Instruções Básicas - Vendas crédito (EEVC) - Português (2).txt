@@ -1,0 +1,2013 @@
+Extrato Eletrônico
+Vendas Crédito
+EspecificaçãoTécnica
+
+
+
+
+                       Visa
+                       Hipercard
+                       Sorocred
+                       CUP
+                       MasterCard
+                       ® Cabal
+                       Diners Club
+                       Credsystem (Mais)
+                       Banescard
+                       JCB
+                       Credz
+
+Índice
+1   Descrição do produto                                   3
+
+
+
+2   Informações diversas                                   4
+
+
+
+3   Estrutura das informações                               4
+    3.1 - Extrato Eletrônico de Vendas                      4
+
+
+4   Layout                                                 7
+    4.1 - Extrato Eletrônico de Vendas                     7
+
+
+
+5   Tabelas
+    1.   - Tabela I – Produtos
+                                                           28
+                                                           28
+    2.   - Tabela II – Tipos de captura                    28
+    3.   - Tabela III – Status do CV/NSU                   29
+    4.   - Tabela IV – Motivos e documentos para Request   30
+    5.   - Tabela IV – Tabela V – Ajustes                  37
+
+
+
+6   Veículos de troca de arquivos                          38
+
+Extrato Eletrônico - Especificação Técnica                                                                                                            3
+
+
+
+
+   1 Descrição do produto
+          O Extrato Eletrônico é uma ferramenta que disponibiliza diariamente1aos estabelecimentos
+          cadastrados a demonstração das transações realizadas com cartões de crédito e
+          débito e informações financeiras, de acordo com as condições estabelecidas nos
+          contratos comerciais.
+
+          Ele é composto por quatro arquivos:
+
+          •EEVD – Extrato Eletrônico de Vendas Débito
+             Transações realizadas com cartões de débito
+
+          •EEVC – Extrato Eletrônico de Vendas Crédito
+             Transações realizadas com cartões de crédito
+
+          •EEFI – Extrato Eletrônico Financeiro
+             Informa os ajustes de crédito e débito que serão realizados em D+1, a contar da
+             data do envio do arquivo, indicando o tipo de lançamento e registro específico
+             (desagendamentos de parcelas realizadas). São agrupadas em um único arquivo
+             as informações referentes a créditos normais, créditos decorrentes de Antecipação
+             de Resumo de Vendas (RAV)2, ajustes (débitos e créditos) e desagendamentos.
+
+          •EESA – Extrato Eletrônico de Saldos em Aberto
+             Demonstra todos os resumos de vendas e seus respectivos valores a crédito, que
+             serão efetivados futuramente, a partir do 1º-dia (inclusive) do mês em referência.
+             Trata-se de uma informação estática, ou seja, não contempla eventuais ajustes de
+             crédito, débito, Net3 e desagendamentos de parcelas.
+
+          Principais vantagens para automatização
+             • Integração sistêmica do extrato de vendas e financeiro;
+             • Conciliação automática de seus recebíveis;
+             • Integridade no recebimento das informações/dados;
+             • Agilidade na obtenção dos resultados;
+             • Empresas homologadas pela Rede, para o tráfego dos arquivos;
+             • Ambiente seguro para recebimento dos arquivos;
+             • Permite que sua área de TI ou empresa conciliadora customize
+               as aplicações inerentes a cada setor;
+             • Atualização diária;
+             • Suporte técnico de especialistas.
+
+
+
+
+          1. Exceto para o Extrato Eletrônico de Saldos em Aberto, que é disponibilizado apenas uma vez por mês. 2. RAV– Resumo Antecipado de Vendas
+          Serviço oferecido pela Rede, que permite ao estabelecimento antecipar seus recebimentos futuros. 3. Net – Processo para compensação de ajustes
+          a débito, em resumo de créditos futuros.
+
+Extrato Eletrônico - Especificação Técnica                                                                 4
+
+
+
+
+ 2        Informações diversas
+          • Se ocorrer algum tipo de problema no processamento do arquivo, redirecioná-lo a Rede,
+            para que haja uma análise detalhada.
+
+          • Quando não existir movimento, será enviado ao estabelecimento u m arquivo contendo
+            somente os registros do header e o trailer.
+
+          • Em caso de reprocessamento do arquivo:
+                 - À data do header (registro 030 – posições 004 a 011) será atribuída a data em que o
+                   reprocessamento ocorrer;
+                 - À sequência do movimento (registro 030 – posições 076 a 081) será atribuído “000001”.
+
+          • O estabelecimento que pretende receber o Extrato Eletrônico deverá contratar uma VAN
+            (conforme item 4) e informar o número de filiação e os produtos que deseja receber:
+
+          EEVC - Extrato Eletrônico de Vendas Crédito
+          EEVD - Extrato Eletrônico de Vendas Débito
+          EEFI - Extrato EletrônicoFinanceiro
+          EESA - Extrato Eletrônico de SaldosemAberto
+
+          • Nomenclaturas:
+
+          RV - (Resumo de Vendas)
+          CV - (Comprovante deVenda)
+          NSU - (Número Sequencial Único)
+          RAV - (Resumo Antecipado deVendas)
+          AVS - (Address VerificationSystem)
+          TO - (Transmissão Off-line)
+          OC - (Ordem deCrédito)
+
+          Obs.: o registro possui tamanho de 1.024 posições, e deverão ser considerados os campos
+          livres após a última coluna.
+
+ 3       Estrutura das informações
+          1. Extrato Eletrônico deVendas
+
+
+
+          O arquivo do Extrato Eletrônico de Vendas está organizado por grupo, matriz4 e PVe é
+          composto por:
+
+          • Avisos de Request (solicitação de documentação comprobatória de venda).
+          • Demonstrativo dos resumos de vendas5 (e composição de seus respectivos cartões/NSUs)
+            das vendas capturadas pela Rede no dia anterior, transações aceitas e rejeitadas.
+
+Extrato Eletrônico - Especificação Técnica                                                             5
+
+
+
+
+          • As rejeições correspondem às transações que não satisfazem às condições contratuais
+            estabelecidas e são identificadas conforme TabelaIII.
+          • Os ajustes efetuados no RV em questão.
+          • Nos registros que contém detalhamento de RV, o campo ”Número do cartão“poderá estar
+            criptografado.
+
+          O Extrato Eletrônico de Vendas organiza as informações por matriz do estabelecimento e por
+          tipo de transação. Sua organização é descrita abaixo:
+
+          002 - Header doArquivo
+          004 - HeaderMatriz
+          005- Aviso de Request
+          033 - Aviso de Request(E-Commerce)
+          006 - RVRotativo
+          008 - CV/NSU Rotativo
+          034 - CV/NSU Rotativo (E-Commerce)
+          040 - CV/NSU Recarga (exclusivo para operadoras de celular)
+          010 - RVParcelado semjuros
+          011 - Ajuste a Crédito CV/NSU Parcelado sem juros
+          012 - CV/NSU Parcelado sem juros
+          035 - CV/NSU Parcelado sem juros (E-Commerce)
+          014 - Parcelas semjuros
+          016 - RVIATA
+          017 - AVS
+          018- CV/NSU IATA
+          036 - CV/NSU IATA(E-Commerce)
+          019 - Serasa
+          020 - Parcelas IATA
+          021 - SecureCode
+          022 - RVDólar
+          024 - CV/NSU Dólar 012
+          026 - TotalizadorMatriz
+          028 - Trailer doArquivo
+
+
+          Abaixo, as descrições dos tipos de registros:
+
+          Registro 002 - Header do arquivo
+          Identifica o tipo de arquivo e o nome comercial do estabelecimento
+          Registro 004 - Header matriz
+          Identifica a matriz de vendas do estabelecimento
+          Registro 005 - Aviso de Request
+          Identifica as transações contestadas pelo portador do cartão, para as quais se deve enviar
+          documento comprobatório daoperação
+
+Extrato Eletrônico - Especificação Técnica                                                                                                 6
+
+
+
+
+          Registro 006 - Resumo de vendas - Rotativo
+          Identifica o resumo de vendas que agrupa CV/NSUs de transações de crédito rotativo
+          Registro 008 - Comprovante de venda (CV/NSU) rotativo
+          Identifica a transação de crédito rotativo
+          Registro 040
+          Identifica asinformações de vendas de recarga de celular (exclusivo para operadoras decelular)
+          Registro 010 - Resumo de vendas - Parcelado sem juros
+          Identifica o resumo de vendas que agrupa CV/NSUs de transações
+          de crédito parcelado semjuros
+          Registro 011 - Ajuste a crédito
+          Ajuste acrédito
+          Registro 012 - Comprovante de venda parcelado sem juros
+          Identifica a transação de crédito parcelado semjuros
+          Registro 014 - Parcela de transação parcelada sem juros
+          Identifica o lançamento das parcelas do RV,da operação parcelada semjuros
+          Registro 016 - Resumo de vendas parceladas IATA
+          Identifica o resumo de vendas que agrupa CV/NSUs de transações de crédito IATA
+          Registro 017 -AVS
+          Identifica detalhes das consultasAVS
+          Registro 018 - Comprovante de venda parcelado IATA
+          Identifica a transação de crédito parceladoIATA
+          Registro 019 -Serasa
+          Identifica detalhes das consultas Serasa
+          Registro 020 - Parcela de transação parcelada IATA
+          Identifica o lançamento das parcelas do RV,de uma operação parceladaIATA
+          Registro 021 -SecureCode
+          Identifica detalhes das consultas SecureCode
+          Registro 022 - Resumo de vendas em dólar
+          Identifica o resumo de vendas que agrupa CV/NSUs de transações de crédito em dólar
+          Registro 024 - Comprovante de venda dólar
+          Identifica a transação de crédito em dólar
+          Registro 026 - Totalizador matriz
+          Totaliza o movimento de vendas dodia
+          Registro 028 - Trailer
+          Indica o fim doarquivo
+
+          Obs.: os registros são gerados em nosso sistema com tamanho de até 1.024 posições (VB) e
+          não são fixos. Considerar campo livre após a informação da última coluna de cada registro.
+
+          4. São considerados matrizes os pontos de venda que centralizam administrativamente um conjunto de pontos de vendas do
+          estabelecimento. Por meio dos conceitos de grupo, matriz e ponto de venda, representamos a estrutura organizacional que os
+          estabelecimentos adotam. 5. O conceito de resumo de vendas se originou com as transações manuais. Um conjunto de
+          comprovantes de vendas (CV/NSUs) é totalizado em u m resumo de vendas. Nas transações eletrônicas, o resumo de Vendas é gerado
+          automaticamente quando da finalização do POS pelo ponto de venda ou no corte do movimento realizado diariamente à 0h, pelo
+          processamento na Rede.
+
+Extrato Eletrônico - Especificação Técnica                                                                            7
+
+
+
+
+ 4        Layout
+
+          4.1 Extrato Eletrônico de Vendas
+
+
+
+                                           Registro 002 – Header do Arquivo
+
+              Início           Fim       Tam.            Pic         Descrição
+               001             003       003            Num.         Tipo de registro (“002”)
+               004             011       008            Num.         Data de emissão (DDMMAAAA)
+               012             019       008             Alfa        “Rede”
+               020             049       030             Alfa        “Extrato Eletrônico de Vendas”
+               050             071       022             Alfa        Nome comercial (grupo/matriz)
+               072             077       006            Num.         Sequência do movimento
+               078             086       009            Num.         Nº PVgrupo ou matriz
+               087             101       015             Alfa        Tipo de movimento
+               102             121       020             Alfa        Versão do arquivo
+               122             1024      903             Alfa        Livre
+
+
+
+
+                                                Critérios de edição dos dados
+
+           Tipo do registro                                “002” = Header do arquivo
+                                                           Data de emissão do arquivo; formato: numérico,
+           Data de emissão
+                                                           na forma “DDMMAAAA
+           Rede                                            Literal
+           Extrato de Movimentação Financeira              Literal
+           Nome Comercial                                  Nome fantasia que identifica o grupo oumatriz
+                                                           Sequencial iniciado em 000001 e incrementado
+           Sequência do movimento
+                                                           de 1 a cada movimento enviado
+           Nº PVgrupo ou matriz                            Código do ponto de venda, grupo oumatriz
+           Tipo de movimento                               Diário ou reprocessamento
+           Versão do arquivo                               V2.01 – 09/06 – EEVC (atual) – 07/2010 – EEVC (prevista)
+
+
+
+
+                                                Registro 004 - Header matriz
+
+              Início           Fim       Tam.            Pic         Descrição
+               001             003       003            Num.         Tipo de registro (“004”)
+               004             012       009             Alfa        Nº-PVmatriz
+               013             034       022             Alfa        Nome comercial da matriz
+
+Extrato Eletrônico - Especificação Técnica                                                                   8
+
+
+
+
+                                               Critérios de edição dos dados
+
+           Tipo do registro                               “004” = Header de Matriz
+           Nº-PVMatriz                                    Código do Ponto de VendaMatriz
+           Nome Comercial da Matriz                       Nome fantasia que identifica amatriz
+
+
+
+
+                                                 Registro 005 –Request 6
+
+              Início            Fim      Tam.           Pic       Descrição
+               001              003      003           Num.       Tipo de registro (“005”)
+               004              012      009           Num.       Número do PV
+               013              021      009           Num.       Número do RV
+               022              037      016            Alfa      Número do cartão
+               038              052      015          9(13)V99    Valor da transação“CV/NSU”
+               053              060      008           Num.       Data da transação “CV/NSU” (DDMMAAAA)
+               061              075      015           Num.       Número de Referência
+               076              090      015           Num.       Número do processo
+               091              102      012           Num.       Número do CV/NSU
+               103              108      006            Alfa      Nº-de autorização
+               109              112      004            Alfa      Código do Request
+               113              120      008           Num.       Limite de envio dos documentos(DDMMAAAA)
+               121              121      001            Alfa      Bandeira (2)
+               122            1024       903            Alfa      Livre
+
+
+
+
+                                               Critérios de edição dos dados
+
+           Tipo do registro                               “005” = Request – Solicitação de documentação
+           Nº PV                                          Código do ponto devenda
+           Número do RV                                   Número do resumo de vendas
+           Número do cartão                               Número do cartão
+           Valor da transação                             Valor do comprovante de vendas
+                                                          Data do comprovante de vendas
+           Data do CV/NSU (DDMMAAAA)
+                                                          numérico, no formato DDMMAAAA
+                                                          Número de Referência interno, número através
+           Referência
+                                                          do qual é possível localizar atransação
+                                                          Número de processo gerado para
+           Número do processo
+                                                          regularizar esta pendência
+           Número do CV/NSU                               Número do comprovante devendas
+           Código da autorização                          Número da autorização da transação
+           Código do Request                              Código do motivo do Request (ver tabelaIV)
+                                                          Data limite de envio de documentos
+           Data de envio de documentos
+                                                          para contestação do Request
+           Bandeira (2)                                   Identifica o cartão utilizado (ver tabelaI)
+
+Extrato Eletrônico - Especificação Técnica                                                                   9
+
+
+
+
+          Este registro é enviado quando o Portador do cartão não reconhece a transação.
+          Ao recebê-lo, o Estabelecimento deve proceder da seguinteforma:
+          • Encaminhar todos os documentos discriminados na Tabela IV, assim como os dados
+            presentes neste registro, para o Fax (0xx11) 2131 6399, que é o canal exclusivo para esta
+            finalidade. Sepreferir, envie por meio dos Correios:
+            A/C Intercâmbio - CEP 09510-999 – São Caetano do Sul – SP;
+          • É recomendado que todos os documentos sejam enviados à Rede de forma legível e o
+            mais rápido possível, pois o não cumprimento do prazo de 20 dias acarretará o débito
+            do valor líquido da venda em seu domicílio bancário ou sua compensação comcréditos
+            futuros;
+          • Utilize carta registrada para o envio destes documentos, para garantir o seu recebimento
+            pela Rede;
+          • Caso seu estabelecimento receba carta de Request, não desconsidere e responda da
+            mesma forma que é feito para Requesteletrônico.
+
+
+
+                                        Registro 033 - Request (e-commerce)
+
+              Início          Fim       Tam.           Pic      Descrição
+                 1            3          3            Num.      Tipo de registro ("033")
+                 4            12          9           Num.      Número do PV
+                 13           21          9           Num.      Número do RV
+                 22           37         16            Alfa     Número do Cartão
+                 38           45          8           Num       Data da transação "CV / NSU" (DDMMAAAA)
+                 46           57         12           Num       Número do CV / NSU
+                 58           63          6            Alfa     Nº-de autorização
+                 64           83         20            Alfa     TID
+                 84           113        30            Alfa     Número Pedido
+
+
+
+                                              Critérios de edição dos dados
+
+           Tipo do registro                              “033” = Request – Solicitação de documentação
+           Número do PV                                  Código do Ponto deVenda
+           Número do RV                                  Número do Resumo deVendas
+           Número do Cartão                              Número do Cartão
+                                                         Data do Comprovante de Venda Numérico, no formato
+           Data da transação “CV / NSU” (DDMMAAAA)
+                                                         DDMMAAAA
+           Número do CV / NSU                            Número do Comprovantes deVenda.
+           Nº-de autorização                             Número da autorização daTransação
+                                                         Número do comprovante de vendas realizada
+           TID
+                                                         pelo e-commerce Rede
+           Número do Pedido                              Número atribuído no momento dacompra
+
+Extrato Eletrônico - Especificação Técnica                                                                           10
+
+
+
+
+                                               Registro 006 - RV rotativo
+
+         Início           Fim      Tam.           Pic        Descrição
+          001             003      003           Num.        Tipo de registro (“006”)
+          004             012      009           Num.        Número do PV
+          013             021      009           Num.        Número do RV
+          022             024      003           Num.        Nº do banco
+          025             029      005           Num.        Nº da agência
+          030             040      011           Num.        Nº da conta-corrente
+          041             048      008           Num.        Data do RV(DDMMAAAA)
+          049             053      005           Num.        Quantidade de CV/NSUs acatados (somenteaprovadas)
+          054             068      015         9(13)V99      Valor bruto
+          069             083      015         9(13)V99      Valor da gorjeta
+          084             098      015         9(13)V99      Valor rejeitado (transações manuais eTO)
+          099             113      015         9(13)V99      Valor do desconto
+          114             128      015         9(13)V99      Valor líquido
+          129             136      008           Num.        Data de crédito (DDMMAAAA)
+          137             137      001            Alfa       Bandeira (2)
+
+
+
+
+                                             Critérios de edição dos dados
+
+      Tipo do registro                    “006” = RV crédito rotativo
+      Nº PV                               Código do ponto devenda
+      Número do RV                        Número do resumo de vendas
+      Nº do banco                         Código de registro do banco no BancoCentral
+      Nº da agência                       Prefixo da agência
+      Nº da conta-corrente                Número da conta-corrente
+      Data do RV(DDMMAAAA)                Data do resumo de vendas numérico, no formatoDDMMAAAA
+      Quantidade de CV/NSUs acatados      Quantidade de comprovantes de vendas acatados que compõem o RV
+                                          Soma dos valores dos comprovantes de vendas apresentados
+      Valor bruto
+                                          ou capturados
+      Valor da gorjeta                    Soma dos valores de gorjeta ou taxas de serviço cobrados no ato dacompra
+      Valor rejeitado                     Soma dos valores dos comprovantes rejeitados
+      Valor do desconto                   Valor referente à taxa de desconto
+                                          Valor correspondente ao crédito que será realizado no domicílio
+      Valor líquido
+                                          bancário. Neste valor não estão contemplados os ajustes Net
+      Data de crédito (DDMMAAAA)          Data que o crédito será realizado, numérico, no formatoDDMMAAAA
+      Bandeira (2)                        Identifica o cartão utilizado (ver tabelaI)
+
+Extrato Eletrônico - Especificação Técnica                                                                           11
+
+
+
+
+                                              Registro 008 – CV/NSU rotativo
+
+              Início          Fim      Tam.           Pic     Descrição
+               001            003      003           Num.     Tipo de registro (“008”)
+               004            012      009           Num.     Número do PV
+               013            021      009           Num.     Número do RV
+               022            029      008           Num.     Data do CV/NSU (DDMMAAAA)
+               030            037      008           Num.     Zeros
+               038            052      015         9(13)V99   Valor do CV/NSU
+               053            067      015         9(13)V99   Valor da gorjeta
+               068            083      016           Alfa     Número do cartão
+               084            086      003           Alfa     Status do CV/NSU (4)
+               087            098      012           Num.     Número do CV/NSU
+               099            111      013           Alfa     Número de referência
+               112            126      015         9(13)V99   Valor do desconto
+               127            132      006           Alfa     Nº autorização
+               133            138      006           Num.     Hora da transação (HHMMSS)
+               139            154      016           Alfa     Nº do bilhete
+               155            170      016           Alfa     Nº do bilhete
+               171            186      016           Alfa     Nº do bilhete
+               187            202      016           Alfa     Nº do bilhete
+               203            203      001           Alfa     Tipo de captura
+               204            218      015         9(13)V99   Valor líquido
+               219            226      008           Alfa     Número do terminal
+               227            229      003           Alfa     Sigla do país
+               230            230      001           Alfa     Bandeira
+
+
+
+
+                                              Critérios de edição dos dados
+
+           Tipo do registro                            “008” = CV/NSU crédito rotativo
+           Número do PV                                Código do ponto devenda
+           Número do RV                                Número do resumo de vendas
+                                                       Data do comprovante de vendas, numérico, no formato
+           Data do CV/NSU (DDMMAAAA)
+                                                       DDMMAAAA
+           Valor do CV/NSU                             Valor do comprovante de vendas
+           Valor da gorjeta                            Valor da gorjeta ou taxa de serviços cobrada no ato davenda
+           Número do cartão                            Número do cartão decrédito
+
+Extrato Eletrônico - Especificação Técnica                                                                      12
+
+
+
+
+                                             Critérios de edição dos dados
+
+                                                      Identifica se o CV/NSU foi acatado ou não e o motivo
+           Status do CV/NSU (4)                       da rejeição em caso de não acatamento da operação
+                                                      (ver tabela III)
+                                                      Número do comprovante de vendas, numérico, no formato
+           Número do CV/NSU
+                                                      DDMMAAAA
+           Número de referência                       Número enviado nas transações offline de vendas
+           Valor do desconto                          Valor referente à taxa de desconto
+           Número da autorização                      Número da autorização
+           Hora da transação                          Hora do CV/NSU (HHMMSS)
+           Número do bilhete                          Número do bilhete aéreo (apenas para companhias aéreas)
+           Tipo de captura                            Forma que foi capturada a transação – tabela II
+           Valor líquido                              Valor líquido
+           Número do terminal                         Número do terminal que capturou atransação
+           Sigla Pais                                 identifica a origem do cartão
+           Bandeira                                   Identifica a bandeira da venda
+
+
+
+
+                                     Registro 034 – CV/NSU Rotativo (e-commerce)
+
+              Início           Fim    Tam.          Pic       Descrição
+                1              3        3          Num        Tipo de registro (“034”)
+                 4             12       9          Num        Número do PV
+                13             21       9          Num        Número do RV
+                22             29       8          Num        Data do CV / NSU (DDMMAAAA)
+                30             44      15        9(13)V99     Valor do CV / NSU
+                45             60      16           Alfa      Número do cartão
+                61             72      12          Num        Número do CV / NSU
+                73             78       6           Alfa      Nº Autorização
+                79             98      20           Alfa      TID
+                99             128     30           Alfa      Número do Pedido
+
+Extrato Eletrônico - Especificação Técnica                                                                      13
+
+
+
+
+                                               Critérios de edição dos dados
+
+           Tipo do registro                               “034” = CV / NSU Crédito Rotativo
+           Número do PV                                   Código do Ponto deVenda
+           Número do RV                                   Número do Resumo deVendas
+                                                          Data do Comprovante de vendas Numérico, no formato
+           Data do CV/NSU (DDMMAAAA)
+                                                          DDMMAAAA
+           Valor do CV/NSU                                Valor do Comprovante de vendas
+           Número do cartão                               Número do cartão deCrédito
+                                                          Número do Comprovante de Vendas Contém zeros
+           Número do CV/NSU
+                                                          quando o CV / NSU é manual
+           Número da autorização                          Número da Autorização
+                                                          Número do comprovante de vendasrealizadas
+           TID
+                                                          pelo e-commerce Rede
+           Número do pedido                               Número atribuído no momento dacompra
+
+
+
+                          Registro 040 – CV/NSU Recarga (exclusivo para operadoras de Celular)
+
+              Início          Fim        Tam.           Pic      Descrição
+                 1             3           3           Num.      Tipo de registro (“040”)
+                 4             12          9           Num.      Número do PV
+                 13            21          9           Num.      Número do Resumo deVendas
+                 22            29          8           Num.      Data do CV/NSU (DDMMAAAA)
+                 30            41         12           Num.      Número do CV/NSU
+                 42            56         15          9(13)V99   Valor da recarga
+                 57            62          6           Num.      Número da autorização
+                 63            77         15           Num.      Número do celular (DDXXXXX9999)
+                 78            78          1           Num.      Bandeira
+
+
+
+                                               Critérios de edição dos dados
+
+           Tipo do registro “040”                         CV/NSU crédito rotativo
+           Número do PV                                   Código do ponto devenda
+           Número do RV                                   Número do resumo de vendas
+                                                          Data do comprovante de vendas, numérico, no formato
+           Data do CV/NSU (DDMMAAAA)
+                                                          DDMMAAAA
+           Valor da Recarga                               Valor da recarga realizado
+           Número da autorização                          Número da autorização
+           Número do celular                              Número do celular que recebeu arecarga
+           Bandeira                                       Identifica a bandeira da venda
+
+Extrato Eletrônico - Especificação Técnica                                                                    14
+
+
+
+
+                                       Registro 010 - RV parcelado sem juros
+
+             Início           Fim      Tam.            Pic       Descrição
+              001             003       003           Num.       Tipo de registro (“010”)
+              004             012       009           Num.       Número do PV
+              013             021       009           Num.       Número do RV
+              022             024       003           Num.       Nº do banco
+              025             029       005           Num.       Nº da agência
+              030             040       011           Num.       Nº da conta-corrente
+              041             048       008           Num.       Data do RV(DDMMAAAA)
+              049             053       005           Num.       Quantidade de CV/NSUs
+              054             068       015          9(13)V99    Valor bruto
+              069             083       015          9(13)V99    Valor da gorjeta
+              084             098       015          9(13)V99    Valor rejeitado
+              099             113       015          9(13)V99    Valor do desconto
+              114             128       015          9(13)V99    Valor líquido
+              129             136       008           Num.       Data de crédito da 1ª parcela(DDMMAAAA)
+              137             137       001            Alfa      Bandeira (2)
+
+
+
+                                              Critérios de edição dos dados
+
+          Tipo do registro                               “010” = RV parcelado sem juros
+          Número do PV                                   Código do ponto devenda
+          Número do RV                                   Número do resumo de vendas
+          Nº do banco                                    Código de registro do banco no BancoCentral
+          Nº da agência                                  Prefixo da agência
+          Nº da conta-corrente                           Número da conta-corrente
+                                                         Data do resumo de vendas, numérico, no formato
+          Data do RV(DDMMAAAA)
+                                                         DDMMAAAA
+                                                         Quantidade de comprovantes de vendas que
+          Quantidade de CV/NSUs
+                                                         compõem o RV
+                                                         Soma dos valores dos comprovantes de vendas
+          Valor bruto
+                                                         apresentados ou capturados
+                                                         Soma dos valores de gorjeta ou taxas
+          Valor da gorjeta
+                                                         de serviço cobrados no ato dacompra
+          Valor rejeitado                                Soma dos valores dos comprovantes rejeitados
+          Valor do desconto                              Valor referente à taxa de desconto
+                                                         Valor correspondente ao crédito que será realizado
+          Valor líquido                                  no domicílio bancário. Neste valor não estão
+                                                         contemplados os ajustes Net
+                                                         Data que o crédito será realizado
+          Data de crédito da 1ª-parcela (DDMMAAAA)
+                                                         Numérico, no formatoDDMMAAAA
+          Bandeira (2)                                   Identifica o cartão utilizado (ver tabelaI)
+
+Extrato Eletrônico - Especificação Técnica                                                                              15
+
+
+
+
+                               Registro 011 - Ajustes a crédito – Extrato Eletrônico de Vendas
+
+              Início           Fim         Tam.           Pic       Descrição
+               001             003         003           Num.       Tipo de registro (“011”)
+               004             012         009           Num.       Número do PVcreditado
+               013             021         009           Num.       Número do resumo do crédito
+               022             029         008           Num.       Data do ajuste (DDMMAAAA)
+               030             044         015          9(13)V99    Valor do ajuste
+               045             052         008           Num.       Data do crédito (DDMMAAAA)
+               053             067         015          9(13)V99    Valor do crédito
+               068             068         001           Num.       C(Crédito)
+               069             071         003           Num.       Banco
+               072             077         006           Num.       Agência
+               078             088         011           Num.       Conta-corrente
+               089             090         002           Num.       Motivo do ajuste (cód. da tabelaV)
+               091             118         028            Alfa      Descrição do ajuste (String)
+               119             119         001            Alfa      Bandeira
+
+
+
+                                                 Critérios de edição dos dados
+
+           Tipo do registro                                 “011” = Ajuste a crédito
+           Número do PV                                     Código do ponto de Venda que está sendocreditado
+           Número do resumo de crédito                      Número do resumo gerado para o crédito
+           Data do ajuste                                   Data do lançamento do crédito
+           Valor do ajuste                                  Valor do lançamento a ser realizado
+           Data do crédito                                  Data da emissão da Ordem de Crédito
+           Valor do crédito                                 Valor do lançamento a crédito netado
+           C(Crédito)                                       Indicador de crédito
+           Número do banco                                  Código de registro do banco no Banco Central -BACEN
+           Número da agência                                Prefixo da agência (código da agência)
+           Número da conta-corrente                         Número da conta-corrente
+           Motivo do ajuste(código)                         Identifica o motivo que originou o crédito (ver tabela V)
+           Descrição do ajuste (String)                     Identifica a descrição do motivo que originou ocrédito
+           Bandeira (String)                                Identifica a bandeira do cartão (ver tabela I)
+
+
+
+                                          Registro 12 - CV/NSU parcelado s/juros
+
+              Início           Fim         Tam.           Pic       Descrição
+               001             003         003           Num.       Tipo de registro (“012”)
+               004             012         009           Num.       Número do PV
+               013             021         009           Num.       Número do RV
+
+Extrato Eletrônico - Especificação Técnica                                                                      16
+
+
+
+
+                                       Registro 12 - CV/NSU parcelado s/juros
+
+              Início          Fim      Tam.            Pic      Descrição
+               022            029       008           Num.      Data do CV/NSU (DDMMAAAA)
+               030            037       008           Num.      Zeros
+               038            052       015          9(13)V99   Valor do CV/NSU
+               053            067       015          9(13)V99   Valor da gorjeta
+               068            083       016            Alfa     Número do cartão
+               084            086       003            Alfa     Status do CV/NSU (1)
+               087            088       002           Num.      Número de parcelas
+               089            100       012           Num.      Número do CV/NSU
+               101            113       013            Alfa     Número de referência
+               114            128       015          9(13)V99   Valor do desconto
+               129            134       006            Alfa     Nº da autorização
+               135            140       006           Num.      Hora da transação (HHMMSS)
+               141            156       016            Alfa     Nº do bilhete
+               157            172       016            Alfa     Nº do bilhete
+               173            188       016            Alfa     Nº do bilhete
+               189            204       016            Alfa     Nº do bilhete
+               205            205       001            Alfa     Tipo de captura
+               206            220       015          9(13)V99   Valor líquido do CV/NSU
+               221            235       015          9(13)V99   Valor líquido da primeira parcela
+               236            250       015          9(13)V99   Valor líquido das demais parcelas
+               251            258       008            Alfa     Número do terminal
+               259            261       003            Alfa     Sigla do país
+               262            262       001            Alfa     Bandeira
+
+
+
+
+                                              Critérios de edição dos dados
+
+           Tipo do registro                              “012” = CV/NSU parcelado sem juros
+           Número do PV                                  Código do ponto devenda
+           Número do RV                                  Número do resumo de vendas
+                                                         Data do comprovante de vendas, numérico, no formato
+           Data do CV/NSU (DDMMAAAA)
+                                                         DDMMAAAA
+           Valor do CV/NSU                               Valor do vomprovante de vendas
+                                                         Valor da gorjeta ou taxa deserviços
+           Valor da gorjeta
+                                                         cobrada no ato davenda
+           Número do cartão                              Número do cartão decrédito
+                                                         Identifica se o CV/NSU foi acatado ou não e o motivo
+           Status do CV/NSU (4)                          da rejeição em caso de não acatamento da operação
+                                                         (ver tabela III)
+           Número de parcelas                            Quantidade de parcelas datransação
+
+Extrato Eletrônico - Especificação Técnica                                                                         17
+
+
+
+
+                                                     Critérios de edição dos dados
+
+                                                                Número do comprovante de vendas
+           Número do CV/NSU
+                                                                Contém zeros quando o CV/NSU é manual
+           Número de referência                                 Número enviado nas transações off-line de vendas
+           Valor do desconto                                    Valor referente à taxa de desconto
+           Número da autorização                                Número da autorização
+           Hora da transação                                    Hora do CV/NSU (HHMMSS)
+                                                                Número do bilhete aéreo
+           Número do bilhete
+                                                                (apenas para companhias aéreas)
+           Tipo de captura                                      Forma que foi capturada a transação – TabelaII
+           Valor líquido do CV/NSU                              Valor líquido do CV/NSU
+           Valor líquido da primeira parcela                    Valor líquido da primeira parcela
+           Valor líquido das demais parcelas                    Valor líquido das demais parcelas
+           Número do terminal                                   Número do terminal que capturou atransação
+           Sigla país                                           identificação o país de origem do cartão
+           Bandeira                                             Identifica a bandeira da venda
+
+
+
+
+                                     Registro 35 - CV / NSU Parcelado s/ juros (e-commerce)
+
+              Início           Fim             Tam.           Pic       Descrição
+               001             003              3            Num.       Tipo de registro ("035")
+               004             012              9            Num        Número do PV
+               013             021              9            Num        Número do RV
+               022             029              8            Num        Data do CV / NSU (DDMMAAAA)
+               030             044              15          9(13)V99    Valor do CV / NSU
+               045             060              16            Alfa      Número do cartão
+               061             072              12           Num        Número do CV / NSU
+               073             078              6             Alfa      Nº Autorização
+               079             098              20            Alfa      TID
+               099             128              30            Alfa      Número Pedido
+
+Extrato Eletrônico - Especificação Técnica                                                                      18
+
+
+
+
+                                                Critérios de edição dos dados
+
+           Tipo do registro                                “035” = CV / NSU Parcelado sem juros
+           Número do PV                                    Código do Ponto deVenda
+           Número do RV                                    Número do Resumo deVendas
+                                                           Data do Comprovante de Vendas Numérico, no formato
+           Data do CV / NSU (DDMMAAAA)
+                                                           DDMMAAAA
+           Valor do CV / NSU                               Valor do Comprovante de vendas
+           Número do cartão                                Número do cartão deCrédito
+                                                           Número do Comprovante de Vendas Contém zeros
+           Número do CV / NSU
+                                                           quando o CV / NSU é manual
+           Número da Autorização                           Número da Autorização
+                                                           Número do comprovante de vendasrealizadas
+           TID
+                                                           e-commerce Rede
+           Número do Pedido                                Número atribuído no momento dacompra
+
+
+
+                                      Registro 014 - Parcelas - Parcelado sem juros
+
+              Início           Fim       Tam.            Pic       Descrição
+                 001           003        003           Num.       Tipo de registro (“014”)
+                 004           012        009           Num.       Número do PV
+                 013           021        009           Num.       Número do RV
+                 022           029        008           Num.       Data do RV(DDMMAAAA)
+                 030           037        008           Num.       Brancos
+                 038           039        002           Num.       Número da parcela
+                 040           054        015          9(13)V99    Valor da parcela bruto
+                 055           069        015          9(13)V99    Valor do desconto sobre aparcela
+                 070           084        015          9(13)V99    Valor da parcela líquida
+                 085           092        008           Num.       Data do crédito (DDMMAAAA)
+                 093           1024       932            Alfa      Livre
+
+
+
+                                                Critérios de edição dos dados
+
+           Tipo do registro                                “014” = Parcelas – Parcelado sem juros
+           Número do PV                                    Código do ponto devenda
+           Número do RV                                    Número do Resumo deVendas
+                                                           Data do resumo de vendas, numérico, no formato
+           Data do RV(DDMMAAAA)
+                                                           DDMMAAAA
+           Brancos
+           Número da parcela                               Número sequencial da parcela
+           Valor da parcela                                Valor da parcela líquida
+           Valor do desconto daparcela                     Valor a deduzir da parcela
+                                                           Data que o crédito será realizado noformato
+           Data do crédito (DDMMAAAA)
+                                                           DDMMAAAA)
+
+          Importante: o registro será gerado por parcela, ou seja, para resumo parcelado em 3 vezes serão
+          demonstrados três registros 014.
+
+Extrato Eletrônico - Especificação Técnica                                                                         19
+
+
+
+
+                                                 Registro 016 - RV IATA
+
+              Início           Fim      Tam.           Pic       Descrição
+               001             003      003           Num.       Tipo de registro (“016”)
+               004             012      009           Num.       Número do PV
+               013             021      009           Num.       Número do RV
+               022             024      003           Num.       Nº do banco
+               025             029      005           Num.       Nº da agência
+               030             040      011           Num.       Nº da conta-corrente
+               041             048      008           Num.       Data do RV(DDMMAAAA)
+               049             053      005           Num.       Quantidade de CV/NSUs
+               054             068      015           Num.       Valor bruto
+               069             083      015          9(13)V99    Valor da taxa de embarque
+               084             098      015          9(13)V99    Valor rejeitado
+               099             113      015          9(13)V99    Valor do desconto
+               114             128      015          9(13)V99    Valor líquido
+               129             136      008           Num.       Data de crédito (DDMMAAAA)
+                                                                 Identifica a bandeira do cartão utilizado
+               137             137      001            Alfa
+                                                                 (ver tabela I)
+
+
+
+                                              Critérios de edição dos dados
+
+           Tipo do registro                              “016” = RV parcelado IATA
+           Nº PV                                         Código do ponto devenda
+           Número do RV                                  Número do resumo de vendas
+           Nº do banco                                   Código de registro do banco no BancoCentral
+           Nº da agência                                 Prefixo da agência
+           Nº da conta-corrente                          Número da conta-corrente
+                                                         Data do resumo de vendas, numérico, no formato
+           Data do RV(DDMMAAAA)
+                                                         DDMMAAAA
+                                                         Quantidade de comprovantes de vendas que
+           Quantidade de CV/NSUs
+                                                         compõem o RV
+                                                         Soma dos valores dos comprovantes de vendas
+           Valor bruto
+                                                         apresentados ou capturados
+                                                         Soma dos valores de taxas de embarque cobrados
+           Valor da taxa de embarque
+                                                         no ato dacompra
+           Valor rejeitado                               Soma dos valores dos comprovantes rejeitados
+           Valor do desconto                             Valor referente à taxa de desconto
+                                                         Valor correspondente ao crédito que será realizado
+           Valor líquido
+                                                         no domicílio bancário
+                                                         Data que o crédito será realizado, numérico, no formato
+           Data de crédito (DDMMAAAA)
+                                                         DDMMAAAA
+           Bandeira (2)                                  Identifica o cartão utilizado (ver tabelaI)
+
+Extrato Eletrônico - Especificação Técnica                                                               20
+
+
+
+
+                                                    Registro 017 –AVS
+
+              Início          Fim        Tam.           Pic         Descrição
+               001            003        003           Num.         Tipo de registro (“017”)
+               004            012        009           Num.         Número do PV
+               013            017        005           Num.         Quantidade de consultas realizadas
+               018            025        008           Num.         Data da consulta (DDMMAAAA)
+
+
+                                               Critérios de edição dos dados
+
+           Tipo do registro                                   “017” = AVS
+           Número do PV                                       Código do ponto devenda
+           Quant. consultas realizadas                        Quantidade de consultas realizadas
+           Data da consulta (DDMMAAAA)                        Data da consulta
+
+
+                                         Registro 018 - CV/NSU parcelado IATA
+
+              Início          Fim        Tam.           Pic         Descrição
+               001            003        003           Num.         Tipo de registro (“018”)
+               004            012        009           Num.         Número do PV
+               013            021        009           Num.         Número do RV
+               022            029        008           Num.         Data do CV/NSU (DDMMAAAA)
+               030            037        008           Num.         Zeros
+               038            052        015          9(13)V99      Valor do CV/NSU
+               053            067        015          9(13)V99      Valor da taxa de embarque
+               068            083        016            Alfa        Número do cartão
+               084            086        003            Alfa        Status do CV/NSU (1)
+               087            088        002           Num.         Número de parcelas
+               089            100        012           Num.         Número do CV/NSU
+               101            113        013            Alfa        Número de referência
+               114            128        015          9(13)V99      Valor do desconto
+               129            134        006            Alfa        Nº autorização
+               135            140        006           Num.         Hora da transação (HHMMSS)
+               141            156        016            Alfa        Nº do bilhete
+               157            172        016            Alfa        Nº do bilhete
+               173            188        016            Alfa        Nº do bilhete
+               189            204        016            Alfa        Nº do bilhete
+               205            205        001           Num.         Tipo de captura
+               206            220        015          9(13)V99      Valor líquido
+               221            235        015          9(13)V99      Valor líquido da primeira parcela
+               236            250        015          9(13)V99      Valor líquido das demais parcelas
+               251            258        008            Alfa        Número do terminal
+               259            261        003            Alfa        Sigla do país
+               262            262        001            Alfa        Bandeira
+
+Extrato Eletrônico - Especificação Técnica                                                                       21
+
+
+
+
+                                               Critérios de edição dos dados
+
+           Tipo do registro                               “018” = CV/NSU parcelado IATA
+           Número do PV                                   Código do ponto devenda
+           Número do RV                                   Número do resumo de vendas
+                                                          Data do comprovante de vendas, numérico, no formato
+           Data do CV/NSU (DDMMAAAA)
+                                                          DDMMAAAA
+           Valor do CV/NSU                                Valor do comprovante de vendas
+           Valor da taxa de embarque                      Valor da taxa de embarque
+           Número do cartão                               Número do cartão decrédito
+                                                          Identifica se o CV/NSU foi acatado ou não e o motivo
+           Status do CV/NSU (4)                           da rejeição em caso de não acatamento da operação
+                                                          (ver tabela III)
+           Número de parcelas                             Quantidade de parcelas datransação
+                                                          Número do comprovante de vendas
+           Número do CV/NSU
+                                                          Contém zeros quando o CV/NSU é manual
+           Número de referência                           Número enviado nas transações off-line de vendas
+           Valor do desconto                              Valor referente à taxa de desconto
+           Número da autorização                          Número da autorização
+           Hora da transação                              Hora do CV/NSU (HHMMSS)
+                                                          Número do bilhete aéreo (apenas para companhias
+           Nº do bilhete
+                                                          aéreas)
+                                                          Número do bilhete aéreo (apenas para companhias
+           Tipo de captura
+                                                          aéreas)
+           Valor líquido                                  Forma que foi capturada a transação – TabelaII
+           Valor líquido da primeira parcela              Valor líquido
+           Valor líquido das demais parcelas
+           Número do terminal                             Número do terminal que capturou atransação
+
+           Sigla país                                     Identifica a origem do cartão
+
+           Bandeira                                       Identifica a bandeira da venda (Tabela I)
+
+Extrato Eletrônico - Especificação Técnica                                                                        22
+
+
+
+
+                                     Registro 036 - CV / NSU Parcelado IATA (e-commerce)
+
+              Início           Fim          Tam.           Pic      Descrição
+                 1             3             3            Num       Tipo de registro (“036”)
+                  4            12             9           Num       Número do PV
+                 13            21             9           Num       Número do RV
+                 22            29             8           Num       Data do CV / NSU (DDMMAAAA)
+                 30            44            15          9(13)V99   Valor do CV / NSU
+                 45            60            16            Alfa     Número do cartão
+                 61            72            12           Num       Número do CV / NSU
+                 73            78             6            Alfa     Nº Autorização
+                 79            98            20            Alfa     TID
+                 99            128           30            Alfa     Número do Pedido
+
+
+
+
+                                                  Critérios de edição dos dados
+
+           Tipo do registro                                  “036” = CV / NSU Parcelado IATA
+           Número do PV                                      Código do Ponto deVenda
+           Número do RV                                      Número do Resumo deVendas
+                                                             Data do Comprovante de Vendas Numérico, no formato
+           Data do CV / NSU (DDMMAAAA)
+                                                             DDMMAAAA
+           Valor do CV / NSU                                 Valor do Comprovante de vendas
+           Número do cartão                                  Número do cartão deCrédito
+                                                             Número do Comprovante de Vendas Contém zeros
+           Número do CV / NSU
+                                                             quando o CV / NSU é manual
+           Número da Autorização                             Número da Autorização
+                                                             Número do comprovante de vendasrealizadas
+           TID
+                                                             pelo e-commerce Rede
+           Número Pedido                                     Número atribuído no momento dacompra
+
+
+
+
+                                                      Registro 019 –Serasa
+
+              Início           Fim          Tam.           Pic      Descrição
+                 001           003          003           Num.      Tipo de registro (“019”)
+                 004           012          009           Num.      Número do PV
+                 013           017          005           Num.      Quantidade de consultas realizadas
+                 018           025          008           Num.      Data da consulta (DDMMAAAA)
+
+Extrato Eletrônico - Especificação Técnica                                                                       23
+
+
+
+
+                                                Critérios de edição dos dados
+
+           Tipo do registro                                 “019” = Serasa
+           Número do PV                                     Código do ponto devenda
+           Quant. consultas realizadas                      Quantidade de consultas realizadas
+           Data da consulta (DDMMAAAA)                      Data da consulta
+
+
+
+
+                                         Registro 020 - Parcelas - Parcelado IATA
+
+              Início          Fim        Tam.            Pic       Descrição
+               001            003         003           Num.       Tipo de registro (“020”)
+               004            012         009           Num.       Número do PV
+               013            021         009           Num.       Número do RV
+               022            029         008           Num.       Data do RV(DDMMAAAA)
+               030            037         008           Num.       Brancos
+               038            039         002           Num.       Número da parcela
+               040            054         015          9(13)V99    Valor da parcela bruto
+               055            069         015          9(13)V99    Valor do desconto sobre aparcela
+               070            084         015          9(13)V99    Valor da parcela líquida
+               085            092         008           Num.       Data do crédito (DDMMAAAA)
+               093            1024        932            Alfa      Livre
+
+
+
+
+                                                Critérios de edição dos dados
+
+           Tipo de registro                                “020” = Parcelas - parcelado IATA
+           Número do PV                                    Código do Ponto deVenda
+           Número do resumo                                Número do resumo de vendas
+                                                           Data do comprovante de vendas, numérico, no formato
+           Data do RV
+                                                           DDMMAAAA
+           Brancos
+           Número da parcela                               Número sequencial da parcela
+           Valor da parcela bruto                          Valor da parcela bruto
+           Valor do desconto daparcela                     Valor a deduzir da parcela
+           Valor da parcela líquido                        Valor liquido da parcela
+           Data do crédito (DDMMAAAA)                      Data que o crédito será realizado, formato DDMMAAAA
+
+
+
+
+          Importante: o registro será gerado por parcela, ou seja, para resumo parcelado em 3 vezes serão
+          demonstrados três registros 020.
+
+Extrato Eletrônico - Especificação Técnica                                                            24
+
+
+
+
+                                                Registro 021 –SecureCode
+
+              Início          Fim        Tam.           Pic      Descrição
+               001            003        003           Num.      Tipo de registro (“021”)
+               004            012        009           Num.      Número do PV
+               013            017        005           Num.      Quantidade de consultas realizadas
+               018            025        008           Num.      Data da consulta (DDMMAAAA)
+                26            26         001            Alfa     Bandeira
+
+
+
+                                               Critérios de edição dos dados
+
+           Tipo do registro                                “021” = SecureCode
+           Número do PV                                    Código do ponto devenda
+           Quant. consultas realizadas                     Quantidade de consultas realizadas
+           Data da consulta (DDMMAAAA)                     Data da consulta
+
+
+
+
+                                                  Registro 022 - RV dólar
+
+              Início          Fim        Tam.           Pic      Descrição
+               001            003        003           Num.      Tipo de registro (“022”)
+               004            012        009           Num.      Número do PV
+               013            021        009           Num.      Número do RV
+               022            024        003           Num.      Nº do banco
+               025            029        005           Num.      Nº da agência
+               030            040        011           Num.      Nº da conta-corrente
+               041            048        008           Num.      Data do RV(DDMMAAAA)
+               049            053        005           Num.      Quantidade de CV/NSUs
+               054            068        015          9(13)V99   Valor bruto
+               069            083        015          9(13)V99   Valor da gorjeta
+               084            098        015          9(13)V99   Valor rejeitado
+               099            113        015          9(13)V99   Valor do desconto
+               114            128        015          9(13)V99   Valor líquido
+               129            136        008           Num.      Data de crédito (DDMMAAAA)
+               137            137        001            Alfa     Bandeira (2)
+
+Extrato Eletrônico - Especificação Técnica                                                                         25
+
+
+
+
+                                              Critérios de edição dos dados
+
+           Tipo do registro                              “022” = RV dólar
+           Número do PV                                  Código do ponto devenda
+           Número do RV                                  Número do resumo de vendas
+           Nº do banco                                   Código de registro do banco no BancoCentral
+           Nº da agência                                 Prefixo da agência
+           Nº da conta-corrente                          Número da conta-corrente
+                                                         Data do resumo de vendas, numérico, no formato
+           Data do RV(DDMMAAAA)
+                                                         DDMMAAAA
+                                                         Quantidade de comprovantes de vendas que
+           Quantidade de CV/NSUs
+                                                         compõem o RV
+                                                         Soma dos valores dos comprovantes de vendas
+           Valor bruto
+                                                         apresentados ou capturados
+                                                         Soma dos valores de gorjeta ou taxas de serviço
+           Valor da gorjeta
+                                                         cobrados no ato dacompra
+           Valor rejeitado                               Soma dos valores dos comprovantes rejeitados
+           Valor do desconto                             Valor referente à taxa de desconto
+                                                         Valor correspondente ao crédito que será realizado
+           Valor líquido
+                                                         no domicílio bancário
+                                                         Data que o crédito será realizado, numérico, no formato
+           Data de crédito (DDMMAAAA)
+                                                         DDMMAAAA
+           Bandeira (2)                                  Identifica a bandeira do cartão utilizado (ver tabelaI)
+
+
+
+                                               Registro 024 - CV/NSU dólar
+
+              Início           Fim      Tam.           Pic       Descrição
+               001             003      003           Num.       Tipo de registro (“024”)
+               004             012      009           Num.       Número do PV
+               013             021      009           Num.       Número do RV
+               022             029      008           Num.       Data do CV/NSU (DDMMAAAA)
+               030             037      008           Num.       Zeros
+               038             052      015          9(13)V99    Valor do CV/NSU
+               053             067      015          9(13)V99    Valor da gorjeta
+               068             083      016            Alfa      Número do cartão
+               084             086      003            Alfa      Status do CV/NSU (4)
+               087             095      009          9(13)V99    Cotação do dólar
+               096             103      008           Num.       Data da cotação (DDMMAAAA)
+               104             115      012           Num.       Número do CV/NSU
+               116             128      013            Alfa      Número de referência
+               129             143      015          9(13)V999   Valor do desconto
+               144             149      006            Alfa      Nº autorização
+               150             155      006           Num.       Hora da transação (HHMMSS)
+               156             163      008            Alfa      Número do terminal
+               164             165      002           Num.       Tipo de captura
+               166             167      003            Alfa      Sigla do país
+               169             169      001            Alfa      Bandeira
+
+Extrato Eletrônico - Especificação Técnica                                                                      26
+
+
+
+
+                                              Critérios de edição dos dados
+
+           Tipo do registro                              “024” = CV/NSU em dólar
+           Número do PV                                  Código do ponto devenda
+           Número do RV                                  Número do Resumo deVendas
+                                                         Data do comprovante de vendas
+           Data do CV/NSU (DDMMAAAA)
+                                                         Numérico, no formatoDDMMAAAA
+           Valor do CV/NSU                               Valor do comprovante de vendas em dólar
+                                                         Valor da gorjeta ou taxa de serviço, cobrada no ato
+           Valor da gorjeta
+                                                         da compra em dólar
+           Número do cartão                              Número do cartão decrédito
+                                                         Identifica se o CV/NSU foi acatado ou não e o motivo
+           Status do CV/NSU (4)                          da rejeição em caso de não acatamento da operação
+                                                         (ver tabela III)
+                                                         Cotação do dólar utilizada para conversão do valor
+           Cotação do dólar
+                                                         da operação
+           Data da cotação (DDMMAAAA)                    Data da cotação
+                                                         Número do comprovante de Vvendas
+           Número do CV/NSU
+                                                         Contém zeros quando o CV/NSU é manual
+           Número de referência                          Número enviado nas transações off-line de vendas
+           Valor do desconto                             Valor referente a taxa de desconto
+           Número da autorização                         Número da autorização
+           Hora da transação                             Hora do CV/NSU (HHMMSS)
+           Número do terminal                            Número do terminal que capturou atransação
+           Tipo de captura                               Tipo de captura
+           Sigla do país                                 Identifica o país de origem do cartão
+           Bandeira                                      Identifica a bandeira da venda
+
+
+                                         Registro 026 - Totalizador – Matriz
+
+             Início           Fim       Tam.           Pic       Descrição
+               001             003      003           Num.       Tipo de registro (“026”)
+               004             012      009            Alfa      Nº PVmatriz
+               013             027      015          9(13)V99    Valor total bruto
+               028             033      006           Num.       Quantidade de CV/NSUs rejeitados
+               034             048      015          9(13)V99    Valor total rejeitado
+               049             063      015          9(13)V99    Valor total rotativo
+               064             078      015          9(13)V99    Valor total parcelado semjuros
+               079             093      015          9(13)V99    Valor total parcelado IATA
+               094             108      015          9(13)V99    Valor total dólar
+               109             123      015          9(13)V99    Valor total desconto
+               124             138      015          9(13)V99    Valor total líquido
+               139             153      015          9(13)V99    Valor total da gorjeta
+               154             168      015          9(13)V99    Valor total da taxa de embarque
+               169             174      006           Num.       Quant. CV/NSU acatados
+
+Extrato Eletrônico - Especificação Técnica                                                                           27
+
+
+
+
+                                                  Critérios de edição dos dados
+
+           Tipo do registro                                  “026” = Totalizador matriz
+           Número do PVmatriz                                Código do ponto de vendamatriz
+                                                             Soma dos valores totais dos RVsde todos os PVs
+           Valor total bruto
+                                                             agrupados na matriz
+                                                             Quantidade de CV/NSUs rejeitados por
+           Quantidade de CV/NSUs rejeitados
+                                                             não atender às regras comerciais
+           Valor total rejeitado                             Soma dos valores de CV/NSUs rejeitados
+                                                             Soma dos valores dos RVsrotativos de todos os PVs
+           Valor total rotativo
+                                                             agrupados na matriz
+                                                             Soma dos valores dos RVsparcelados sem juros
+           Valor total parcelado semjuros
+                                                             de todos os PVsagrupados namatriz
+                                                             Soma dos valores dos RVsparcelados IATAde todos
+           Valor total parcelado IATA
+                                                             os PVsagrupados na matriz
+                                                             Soma dos valores de RVsdólar de todos
+           Valor total dólar
+                                                             os PVsagrupados na matriz
+                                                             Soma das taxas de desconto dos RVsde todos os PVs
+           Valor total desconto
+                                                             agrupados na matriz
+                                                             Valor total creditado, correspondente à soma dos
+           Valor total líquido
+                                                             valores líquidos de todos os PVsagrupados namatriz
+           Valor total da gorjeta                            Valor total gorjeta
+           Taxadeembarque                                    Valor total taxa de embarque
+           Quant. CV/NSU acatados                            Quantidade total de CV/NSUs acatados
+
+
+                                              Registro 028 - Trailer de arquivo
+
+             Início              Fim        Tam.           Pic       Descrição
+               001               003        003           Num.       Tipo de registro (“028”) - Trailer de arquivo
+               004               007        004           Num.       Quantidade de matrizes
+               008               013        006           Num.       Quantidade de registros
+               014               022        009            Alfa      Nº PVgrupo
+               023               037        015          9(13)V99    Valor total bruto
+               038               043        006           Num.       Quantidade de CV/NSUs rejeitados
+               044               058        015          9(13)V99    Valor total rejeitado
+               059               073        015          9(13)V99    Valor total rotativo
+               074               088        015          9(13)V99    Valor total parcelado semjuros
+               089               103        015          9(13)V99    Valor total parcelado IATA
+               104               118        015          9(13)V99    Valor total dólar
+               119               133        015          9(13)V99    Valor total desconto
+               134               148        015          9(13)V99    Valor total líquido
+               149               163        015         9(13)V999    Valor total gorjeta
+               164               178        015          9(13)V99    Valor total da taxa de embarque
+               179               184        006           Num.       Quant. CV/NSU acatados
+
+Extrato Eletrônico - Especificação Técnica                                                                         28
+
+
+
+
+                                              Critérios de edição dos dados
+
+           Tipo do registro                              “028” = Totalizador grupo
+           Quantidade de matrizes                        Quantidade de matrizes enviadas no arquivo
+                                                         Quantidade total de registros gravados no arquivo,
+           Quantidade de registros
+                                                         incluindo header, trailer e header de grupo
+           Número do PVdo grupo                          Código do ponto de vendagrupo
+                                                         Soma dos valores totais dos RVsde todos os PVs
+           Valor total bruto
+                                                         agrupados no grupo
+                                                         Quantidade de CV/NSUs rejeitados
+           Quantidade de CV/NSUs rejeitados
+                                                         por não atender às regras comerciais
+           Valor total rejeitado                         Soma dos valores de CV/NSUs rejeitados
+                                                         Soma dos valores dos RVsrotativos
+           Valor total rotativo
+                                                         de todos os PVsagrupados no grupo
+                                                         Soma dos valores dos RVsparcelados sem
+           Valor total parcelado semjuros
+                                                         juros de todos os PVsagrupados no grupo
+                                                         Soma dos valores de RVsdólar de todos
+           Valor total parcelado IATA
+                                                         os PVsagrupados no grupo
+                                                         Soma das taxas de desconto dos RVs
+           Valor total dólar
+                                                         de todos os PVsagrupados no grupo
+                                                         Valor total creditado, correspondente à soma dos
+           Valor total desconto
+                                                         valores líquidos de todos os PVsagrupados no grupo
+           Valor total líquido                           Valor total
+           Valor total gorjeta                           Valor da taxa de embarque
+           Taxadeembarque                                Quantidade de CV/NSUs acatados
+           Quant. CV/NSU acatados                        Quantidade total de CV/NSUs acatados
+
+
+
+
+ 5        Tabelas
+          5.1 Tabela I – Produtos                                               5.2 Tabela II – Tipos de captura
+
+
+             0 = Outras bandeiras             8 = Credsystem (Mais)                  1 = Manual
+             1 = MasterCard                   9 = Sicredi                            2 = POS
+             2 = Diners Club                  A = Avista                             3 = PDV
+             3 = Visa                         E = Elo                                4 = TO
+             4 = Cabal                        B = Banescard                          5 = Internet
+             5 = Hipercard                    J = JCB                                6 = Leitor de trilha
+             6 = Sorocred                     X = Amex                               9 = Outros
+             7 = CUP                          Z = Credz
+
+Extrato Eletrônico - Especificação Técnica                                     29
+
+
+
+
+          5.3 Tabela III – Status do CV/NSU
+
+            0   CV/NSU OK                      43   MQ INVA/NAO TR VISTA
+            1   VENDAJAPROCESSADA              44   CV/NSU S/JRS EM RV ROTAT
+            2   MOEDA INVALIDA                 45   CV/NSU ROT EM RV S/JUROS
+            3   TTPRESTDIF VRVD                47   CARTAON PODEPARCEL
+            4   CV/NSU SEM VR PREST            48   ESTAB.NAO AUTORIZADO
+            5   CPACIMA LIM REDESHO            49   DESCUMPRIM DEPROCED
+            7   CV/NSU IRREGULAR              102 COD AUT N ENCONTRADO
+            8   ESTABBORDEROINVALI            106 VR CV/NSU MAIOR QUEAUT
+           10   CARTAOEMBP                    108 AUT CARTAODIFERENTE
+           11 CV/NSU SEM ASSINATURA           109 ESTABBORDEROINVALI
+           12 CV/NSU ILEGIVEL                 110 TIPOTRANSDF DAAUT
+           13 CV/NSU SEM AUTORIZAÇAO          111 CV/NSU SEM ASSINATURA
+           14   CARTAO N CRED/DINERS          112 CV/NSU ILEGIVEL
+           15 FALTA2A VIAPROCESS              114 CARTAO N CRED/DINERS
+           16   ESTAB S/ IATA N AUTO          115 FALTA2A VIAPROCESS
+           17   CV/NSU IRREGULAR              117 CV/NSU IRREGULAR
+           18   CARTAOEMBP                    125 CARTAO N CRED/DINERS
+           19   TX EMBARQUE VLR EXCD          137 APRES. TARDIA CV/NSU
+           20   CARTAOVENCIDO                 141 PARC.INVAL.VIAC.AERE
+           21 CV/NSU PARA CARTAO JURID        142 NAC. INVAL.– DUTYFRE
+           22 ACIMA LIMITE C/AUTOR            143 MQ INVA/NÃO TR VISTA
+           23 DATA CV/NSU POSTERIOR RV        144 CV/NSU S/ JRS EM RV ROTAT
+           25 CARTAO N CRED/DINERS            145 CV/NSU ROT EM RV S/ JUROS
+           27   CV/NSU PARA CARTAO INTER      147 CARTAON PODEPARCEL
+           28   CARTAOEMBP                    148 ESTAB.NAO AUTORIZADO
+           29   PROMOCAOMASTERCARD®           149 DESCUMPRIM DEPROCED
+           30   TR INV P/TIPO CARTAO          194 CV/NSU SEM AUTORIZAÇAO
+           31 PLAN PAGTO BIG TICKE            198 COD AUTREUTILIZADO
+           32 COD AUT N ENCONTRADO
+           34 DATA CV/NSU POSTERIOR RV
+           35 CV/NSU COM VRINCORRETO
+           36   CV/NSU SEM AUTORIZACAO
+           37   APRES. TARDIA CV/NSU
+           41   PARC.INVAL.VIAC.AERE
+           42   NAC. INVAL.-DUTY FRE
+
+Extrato Eletrônico - Especificação Técnica                                                                     30
+
+
+
+
+                     5.4 Tabela IV - Motivos e documentos para Request
+
+           MOTIVO DO REQUEST             DESCRIÇÃO DO MOTIVO            DOCUMENTOS SOLICITADOS
+
+                                                                   - Comprovante de vendas com os dados
+                                                                     legíveis e se a venda foi realizada com
+                                               Solicitação do
+                                                                     autorização de débito (assinatura em
+                   0017                        comprovante/
+                                                                     arquivo), além deste documento, envie
+                                               documentos
+                                                                     também cópias do cartão eRG
+                                                                     do portador.
+                                                                   - Comprovante de vendas com os dados
+                                                                     legíveis e se a venda foi realizada com
+                                                Solicitação do
+                                                                     autorização de débito (assinatura em
+                   0021                         comprovante
+                                                                     arquivo), além deste documento, envie
+                                                documentos
+                                                                     também cópias do cartão eRG
+                                                                     do portador.
+                                                                   - Comprovante de vendas com os dados
+                                                                     legíveis e se a venda foi realizada com
+                                               Solicitação do
+                                                                     autorização de débito (assinatura em
+                   0041                        comprovante/
+                                                                     arquivo), além deste documento, envie
+                                               documentos
+                                                                     também cópias do cartão eRG
+                                                                     do portador.
+                                                                   - Comprovante de vendas com os dados
+                                                                     legíveis e se a venda foi realizada com
+                                               Solicitação do
+                                                                     autorização de débito (assinatura em
+                   0042                        comprovante/
+                                                                     arquivo), além deste documento, envie
+                                               documentos
+                                                                     também cópias do cartão eRG
+                                                                     do portador.
+                                                                   - Comprovante de vendas com os dados
+                                                                     legíveis e se a venda foi realizada com
+                                               Solicitação do
+                                                                     autorização de débito (assinatura em
+                   0050                        comprovante/
+                                                                     arquivo), além deste documento, envie
+                                               documentos
+                                                                     também cópias do cartão eRG
+                                                                     do portador.
+
+                                                                   - Cópia do comprovante de entrega da
+                                                Solicitação do
+                                                                     mercadoria legível e cópia da consulta
+                   0097                      comprovanteentrega
+                                                                     realizada por meio do avs com ocódigo
+                                                 mercadoria
+                                                                     “w”.
+
+                                                                   - Comprovante de vendas com os dados
+                                                                     legíveis e se a venda foi realizada com
+                                               Solicitação do
+                                                                     autorização de débito (assinatura em
+                 3001/5001                     comprovante/
+                                                                     arquivo), além deste documento, envie
+                                               documentos
+                                                                     também cópias do cartão eRG
+                                                                     do portador.
+                                                                   - Comprovante de vendas com os dados
+                                                                     legíveis e se a venda foi realizada com
+                                                2ª solicitação
+                                                                     autorização de débito (assinatura em
+                 3002/5060                    de comprovante/
+                                                                     arquivo), além deste documento, envie
+                                             documentos legíveis
+                                                                     também cópias do cartão eRG
+                                                                     do portador.
+
+Extrato Eletrônico - Especificação Técnica                                                                            31
+
+
+
+
+           MOTIVO DO REQUEST                 DESCRIÇÃO DO MOTIVO            DOCUMENTOS SOLICITADOS
+
+                                                                       - Comprovante de vendas com os dados
+                                                                         legíveis e se a venda foi realizada com
+                                                    Solicitação
+                                                                         autorização de débito (assinatura em
+                 3003/5003                       do comprovante/
+                                                                         arquivo), além deste documento, envie
+                                                   documentos
+                                                                         também cópias do cartão eRG
+                                                                         do portador.
+                                                                       - Comprovante de vendas com os dados
+                                                                         legíveis e se a venda foi realizada com
+                                                                         autorização de débito (assinatura em
+                                                Desmembrament            arquivo), além deste documento, envie
+                   3040                                                  também cópias do cartão, RG
+                                                  o de transações
+                                                                         do portador;
+                                                                       - Carta explicativa que deverá conter
+                                                                         os esclarecimentos: motivo da realização.
+                                                                       - Comprovante de vendas com os dados
+                                                                         legíveis e se a venda foi realizada com
+                                                                         autorização de débito (assinatura em
+                 3053/5053                    Mercadoria com defeito
+                                                                         arquivo), além deste documento, envie
+                                                                         também cópias do cartão eRG
+                                                                         do portador.
+                                                                       - Comprovante de vendas com os dados
+                                                                         legíveis e se a venda foi realizada com
+                                                                         autorização de débito (assinatura em
+                                                                         arquivo), além deste documento, envie
+                                                                         também cópias do cartão;
+                                                Nãorecebimento           RG do portador;
+                 3055/5030                       de mercadoria         - Nota fiscal;
+                                                                       - Documentação que comprove aentrega
+                                                                         da mercadoria;
+                                                                       - Carta explicativa com objetivo de
+                                                                         esclarecer o ocorrido.
+                                                                       - Comprovante de vendas com os dados
+                                                                         legíveis e se a venda foi realizada com
+                                                                         autorização de débito (assinatura em
+                                                                         arquivo), além deste documento,
+                                                                         envie também cópias do cartão; RG
+                 3059/5130                    Serviços não prestados     do portador;
+                                                                       - Nota fiscal;
+                                                                       - Documentação quecomprove
+                                                                         a prestação do serviço;
+                                                                       - Carta explicativa com objetivo
+                                                                         de esclarecer ocorrido.
+                                                                       - Carta explicativa com objetivo de
+                                                                         esclarecer o ocorrido. Esta carta
+                                                  Cancelament
+                 3060/5085                                               terá o detalhamento de todo o
+                                                   o de
+                                                                         ocorrido, informando a veracidade da
+                                                   transação
+                                                                         contestação.
+
+                                                   Solicitação         - Cópia do comprovante de entrega da
+                 3097/5097                   do comprovanteentrega       mercadoria legível e cópia da consulta
+                                                  mercadoria             realizada por meio do avs com o código“w”.
+
+Extrato Eletrônico - Especificação Técnica                                                                         32
+
+
+
+
+           MOTIVO DO REQUEST             DESCRIÇÃO DO MOTIVO                DOCUMENTOS SOLICITADOS
+
+                                                                       - Comprovante de vendas com os dados
+                                                                         legíveis e se a venda foi realizada com
+                                                                         autorização de débito (assinatura em
+                                                                         arquivo), além deste documento, envie
+                                                                         também cópias do cartão e RG do
+                                               Desmembrament             portador;
+                   3140                          o de transações       - Carta explicativa que deverá conter os
+                                                                         esclarecimentos: motivo da realização
+                                                                         de várias transações no mesmo
+                                                                         estabelecimento e explicação
+                                                                         do que compõe os valoresacima.
+                                                                       - Comprovante de vendas com os dados
+                                                                         legíveis e se a venda foi realizada com
+                                                                         autorização de débito (assinatura
+                                                                         em arquivo), além destedocumento,
+                                                                         envie também cópias do cartão; RG
+                                             Mercadoria/serviço não      do portador;
+                 3153/5153                                             - Nota fiscal;
+                                             confere com descrição
+                                                                       - Documentação que comprove a entrega
+                                                                         da mercadoria/serviço exatamente como
+                                                                         foi solicitado pelo portador do cartão;
+                                                                       - Carta explicativa com objetivo de
+                                                                         esclarecer o ocorrido.
+                                                                       - Comprovante de vendas com os dados
+                                                                         legíveis e se a venda foi realizada com
+                                                                         autorização de débito (assinatura em
+                                                                         arquivo), além deste documento,
+                                                                         envie também cópias do cartão; RG
+                                             Pagamento por outros        do portador;
+                 3159/5086                         meios               - Nota fiscal;
+                                                                       - Documentação que comprove o
+                                                                         pagamento efetuado por outros meios;
+                                                                       - Carta explicativa com objetivo de
+                                                                         esclarecer o ocorrido.
+                                                                       - Carta explicativa com objetivo de
+                                                                         esclarecer o ocorrido. Esta carta terá
+                                                                         o detalhamento de todo o ocorrido,
+                                                                         informando averacidade
+                                                                         da contestação;
+                                                                       - Documentação que comprovea
+                                              Cancelamento e/ou          devolução total e/ou parcial da
+                 3160/5185                   devolução total/parcial     mercadoria;
+                                                  mercadoria           - Comprovante de vendas com os dados
+                                                                         legíveis e se a venda foi realizada com
+                                                                         autorização de débito (assinatura em
+                                                                         arquivo), além deste documento, envie
+                                                                         também cópias do cartão;
+                                                                       - RG do portador;
+                                                                       - Nota fiscal.
+
+Extrato Eletrônico - Especificação Técnica                                                                       33
+
+
+
+
+           MOTIVO DO REQUEST                 DESCRIÇÃO DO MOTIVO          DOCUMENTOS SOLICITADOS
+
+                                                                     - Comprovante de vendas com os dados
+                                                                       legíveis e se a venda foi realizada com
+                                                                       autorização de débito (assinatura em
+                                                                       arquivo), além deste documento, envie
+                                                                       também cópias do cartão;
+                 3253/5253                    Mercadoria devolvida   - RG do portador;
+                                                                     - Nota fiscal;
+                                                                     - Documentação quecomprove
+                                                                       a devolução da mercadoria;
+                                                                     - Carta explicativa com objetivo
+                                                                       de esclarecer o ocorrido.
+                                                                     - Carta explicativa que deverá conter
+                                                                       os esclarecimentos abaixo e a
+                                                                       documentação comprobatória,além
+                                                                       das cópias legíveis do comprovante
+                                                                       de vendas e da respectiva nota fiscal:
+
+                                                                     1) A venda contestada é de transação
+                                                                        adicional referente a uma transação
+                                             Contestação de adendo      realizada anteriormente neste
+                 3259/5230
+                                                  de transação          estabelecimento? (a transação anterior
+                                                                        pode ter sido paga em dinheiro, cartão
+                                                                        ou outro meio depagamento).
+
+                                                                     2) A cobrança adicional foiautorizada
+                                                                         pelo portador do cartão? (enviar
+                                                                         documento que comprove
+                                                                         a autorização do portador).
+                                                                     - Comprovante de vendas com os dados
+                                                                       legíveis e se a venda foi realizada com
+                                               Solicitação do          autorização de débito (assinatura em
+                 6300/7000
+                                         comprovante/documentos        arquivo), além deste documento, envie
+                                                                       também cópias do cartão eRG
+                                                                       do portador.
+                                                                     - Comprovante de vendas com os dados
+                                                                       legíveis e se a venda foi realizada com
+                                               Solicitação do          autorização de débito (assinatura em
+                 6305/7028
+                                         comprovante/documentos        arquivo), além deste documento, envie
+                                                                       também cópias do cartão eRG
+                                                                       do portador.
+                                                                     - Comprovante de vendas com os dados
+                                                                       legíveis e se a venda foi realizada com
+                                               Solicitação do          autorização de débito (assinatura em
+                36321/7029
+                                         comprovante/documentos        arquivo), além deste documento, envie
+                                                                       também cópias do cartão eRG
+                                                                       do portador.
+
+Extrato Eletrônico - Especificação Técnica                                                                        34
+
+
+
+
+           MOTIVO DO REQUEST             DESCRIÇÃO DO MOTIVO            DOCUMENTOS SOLICITADOS
+
+                                                                   - Comprovante de vendas com os dados
+                                                                     legíveis e se a venda foi realizada com
+                                               Solicitação do        autorização de débito (assinatura em
+                 6322/7030
+                                         comprovante/documentos      arquivo), além deste documento, envie
+                                                                     também cópias do cartão eRG
+                                                                     do portador.
+                                                                   - Comprovante de vendas com os dados
+                                                                     legíveis e se a venda foi realizada com
+                                               Solicitação do        autorização de débito (assinatura em
+                 6323/7033
+                                         comprovante/documentos      arquivo), além deste documento, envie
+                                                                     também cópias do cartão eRG
+                                                                     do portador.
+                                                                   - Comprovante de vendas com os dados
+                                                                     legíveis e se a venda foi realizada com
+                                                 Solicitação
+                                                                     autorização de débito (assinatura em
+                 6341/7034                    do comprovante/
+                                                                     arquivo), além deste documento, envie
+                                                documentos
+                                                                     também cópias do cartão eRG
+                                                                     do portador.
+                                                                   - Comprovante de vendas com os dados
+                                                                     legíveis e se a venda foi realizada com
+                                                 Solicitação
+                                                                     autorização de débito (assinatura em
+                   6342                       do comprovante/
+                                                                     arquivo), além deste documento, envie
+                                                documentos
+                                                                     também cópias do cartão eRG
+                                                                     do portador.
+                                                                   - Comprovante de vendas com os dados
+                                                                     legíveis e se a venda foi realizada com
+                                                                     autorização de débito (assinatura em
+                                                                     arquivo), além deste documento, envie
+                                                                     também cópias do cartão;
+                                             Nãorecebimento          RG do portador;
+                   6355                       de mercadoria        - Nota fiscal;
+                                                                   - Documentação que comprove aentrega
+                                                                     da mercadoria;
+                                                                   - Carta explicativa com objetivo de
+                                                                     esclarecer o ocorrido.
+
+                                                  Solicitação      - Cópia do comprovante de entrega da
+                 6397/7097                    do comprovante         mercadoria legível e cópia da consulta
+                                             entrega mercadoria      realizada por meio do avs com o código“w”.
+
+
+                                                                   - Caso o portador tenha realizado
+                                             Rq. dupl. multiplos     realmente as duas transações, envie
+                   5082
+                                                adquirentes          para a rede as cópias legíveis dos dois
+                                                                     comprovantes de vendas.
+
+Extrato Eletrônico - Especificação Técnica                                                                            35
+
+
+
+
+           MOTIVO DO REQUEST                 DESCRIÇÃO DO MOTIVO               DOCUMENTOS SOLICITADOS
+
+                                                                          - Para contestação por duplicidade
+                                                                          da transação: cópia de ambosos
+                                                                          comprovantes das vendas evidenciando
+                                                                          as transações distintas. Para contestação
+                                                                          por pagamento efetuado por outros
+                                                                          meios, por erro no processamento do
+                   3034                 Rq. dupl. multiplos adquirentes   valor ou na quantidade de parcelas da
+                                                                          transação, ou por nãofornecimento
+                                                                          do códigode moeda correto: cópia
+                                                                          do comprovante da transaçãoque
+                                                                          comprove a legitimidade da transaçãoe
+                                                                          carta explicativa detalhando o ocorrido.
+                                                                          - Comprovante de vendas com os dados
+                                                                          legíveis e se a venda foi realizada com
+                                                   Solicitação
+                                                                          autorização de débito (assinatura em
+            8201/8501/8901/9201                 do comprovante /
+                                                                          arquivo), além deste documento, envie
+                                                  documentos
+                                                                          também cópias do cartão e RG do
+                                                                          portador.
+                                                                          - Comprovante de vendas com os dados
+                                                                          legíveis e se a venda foi realizada com
+                                                   Solicitação
+                                                                          autorização de débito (assinatura em
+               8208/8508/8908/9208              do comprovante /
+                                                                          arquivo), além deste documento, envie
+                                                  documentos
+                                                                          também cópias do cartão e RG do
+                                                                          portador.
+                                                                          - Comprovante de vendas com os dados
+                                                                          legíveis e se a venda foi realizada com
+                                                   Solicitação
+                                                                          autorização de débito (assinatura em
+            8300/8600/8700/9300                 do comprovante /
+                                                                          arquivo), além deste documento, envie
+                                                  documentos
+                                                                          também cópias do cartão e RG do
+                                                                          portador.
+                                                                          - Comprovante de vendas com os dados
+                                                                          legíveis e se a venda foi realizada com
+                                                   Solicitação
+                                                                          autorização de débito (assinatura em
+                   9000                         do comprovante /
+                                                                          arquivo), além deste documento, envie
+                                                  documentos
+                                                                          também cópias do cartão e RG do
+                                                                          portador.
+                                                                          - Comprovante de vendas com os
+                                                                          dados legíveis e se a venda foi realizada
+                                                                          com autorização de débito (assinatura
+            8202/8502/8902/9202               Mercadoria com defeito
+                                                                          em arquivo), além deste documento,
+                                                                          envie também cópias do cartão; RG do
+                                                                          portador;
+                                                                          - Comprovante de vendas com os
+                                                                          dados legíveis e se a venda foi realizada
+                                                                          com autorização de débito (assinatura
+                                                                          em arquivo), além deste documento,
+                                                Nãorecebimento            envie também cópias do cartão; RG do
+            8203/8503/8903/9203                  de mercadoria            portador;
+                                                                          - Nota fiscal;
+                                                                          -Documentação que comprovea
+                                                                          devolução da mercadoria;
+                                                                          -Carta explicativa com objetivo de
+                                                                          esclarecer o ocorrido.
+
+Extrato Eletrônico - Especificação Técnica                                                                         36
+
+
+
+
+           MOTIVO DO REQUEST                 DESCRIÇÃO DO MOTIVO             DOCUMENTOS SOLICITADOS
+
+                                                                        - Comprovante de vendas com os dados
+                                                                        legíveis e se a venda foi realizada com
+                                                                        autorização de débito (assinatura em
+                                                                        arquivo), além deste documento, envie
+                                                                        também cópias do cartão;
+            8206/8506/8906/9206               Mercadoria devolvida      RG do portador;
+                                                                        - Nota fiscal;
+                                                                        -Documentação que comprovea
+                                                                        devolução da mercadoria;
+                                                                        -Carta explicativa com objetivo de
+                                                                        esclarecer o ocorrido.
+                                                                        Carta explicativa que deverá conter
+                                                                        os esclarecimentos abaixo e a
+                                                                        documentação comprobatória,além
+                                                                        das cópias legíveis do comprovante de
+                                                                        vendas e da respectiva nota fiscal:
+                                                                        1)A venda contestada é de transação
+                                                                        adicional referente a uma transação
+                                             Contestação de adendo      Realizada anteriormente neste
+            8209/8509/8909/9209                                         estabelecimento? (A transação anterior
+                                                  de transação
+                                                                        pode ter sido paga em dinheiro, cartão
+                                                                        ou outro meio de pagamento);
+                                                                        2)A cobrança adicional foi autorizada
+                                                                        pelo Portador do cartão? (Enviar
+                                                                        documento Que comprove a autorização
+                                                                        do portador).
+
+
+                                                                        - Carta explicativa com objetivo de
+                                                 Cancelament            esclarecer o ocorrido. Esta carta terá
+           8205 /8505 / 8905 / 9205
+                                                 o de                   o detalhamento de todo o ocorrido,
+                                                 Transação              informando averacidade da contestação.
+
+                                                                        Comprovação de vendas:
+                                       Solicitação de comprovaçãode
+            8100/8400/8800/9100                                         - enviar o comprovante originalda(s)
+                                        vendas / Documento Original
+                                                                        transação(ões) contestada(s).
+
+                                                                        Transação de hospedagem contestada:
+                                                                        - enviar carta explicativa que deverá
+                                                                        conter os esclarecimentos da
+            8204/8504/8904/9204         Detalhamento da hospedagem
+                                                                        hospedagem contendo o detalhamento
+                                                                        dos serviços, valores e comprovantes das
+                                                                        transações com dados legíveis.
+
+                                                                        Comprovação de associação:
+            8210/8510/8910/9210        Cópia do contrato deassociação   - enviar cópia legível do contrato de
+                                                                        associação do portador do cartão.
+
+Extrato Eletrônico - Especificação Técnica                                    37
+
+
+
+
+          5.5 Tabela V – Ajustes
+
+            1   PACOTEE-REDE                 43   BOLETOBANCARIO
+            2   CONSULTA DE CHEQUES          44   MENSALIDADECONTROLREDE
+            3   DEBITOPARCELADO              45   RETROATIVOCONTROLREDE
+            4   DEBITOTXTRIBUTO              46   TAXAPARC.ESPECIAL
+            5   TXMAN DOTEF                  48   AL.POS/PINPAD/TX CONECT
+            6   POS-INATIV/CONEC/PIN         49   POS-INATIV/CONEC/PIN
+            7   CREDENC/ADESAO               50   DISPONIVEL
+            8   CANCEL VENDAS HIPERC         51 CREDSECURECODE
+            9   CANCEL/CHBK MAESTRO          52 REVERSAO DEBITO CBK
+           10   CANCELAMENTOSPORDISPUTAS     53 CREDITO RECARGA
+           11   MENS.SECURECODE              54   TOT.LIQID.A MENOR
+           12 MENSALIDADEHIPERCARD           55 CVN CONSIDERADO RV
+           13 MAQUININHA NO CONTA CERTA      56   PREMIO PROMOÇAO PARCELADO
+           14   TARIFADEBITO                 57   PAGTO DESAGIO
+           15 CBK CARTAO CHIP                58   CREDITO ALUGUEL
+           16   ESTORNOCR.INDEV.CI           59   REBATEMENSAL
+           17   INDENIZA POSPERDIDO          60   REBATEFINAL
+           18   CANCEL.DEVENDAS              61   DEV CRED PGTO MAIOR
+           19   SEGUNDA VIA EXTRATO          62   REGULARIZAÇAO DIF. TAXA
+           20   POS-INATIV/CONEC/PIN         63   REGUL.DB ANTERIOR
+           21 CANCELAMENTOMAESTRO            64   PGTO DE RV
+           22 CONTESTAÇAO DE VENDA           65   DEVMENSALHIPERCARD
+           23 CONTESTAÇAO DE VENDA           66   PGT.JURO CORREÇAO
+           24   TRF AD EXCESSO CBACK         67   COMISSAO DE RECARGA
+           25 PACOTEDESERVICOS               68   BONUSCELULARREDE
+           26   PACOTESERVEXCEDENT           69   PGTO VIAÇAO AEREA
+           27   COFPERFORMACE                70   ESTORNO PREÇO UNICO
+           28   AL.POS/PINPAD/TX CONECT      71   PGT.N S/J-1A PARC
+           29 DEBITO RECARGA                 72   PGT.N S/J-2A PARC
+           30   CANCEL DESPDOLAR             73   PGT.N S/J-3A PARC
+           31 ASSISTENCIA REDE               74   PGT.N S/J-4A PARC
+           32 CANCEL VENDA DEBITO            75   PGT.N S/J-5A PARC
+           33 PACOTE GATEWAY                 76   PAGTO MANUAL
+           34   MODELOTARIFARIO              77   PGT.N S/J-7A PARC
+           35 CONSULTAAVS                    78   PGT.N S/J-8A PARC
+           36   DEVOLUÇAO CV                 79   PGT.N S/J-9A PARC
+           37   ESTORNOCR.INDEV.             80   CAPTURACVOFF-TO
+           38   COBRETROATTXADM              81   PCTETUR.CREDITO
+           39   CONTESTVENDASHIPER           82   COMISS.SOBREVENDA
+           40   TARIFAEXT.MENSAL             83   IR S/COMISSAO
+           41 MANUAL REVIEW                  84   ADIC.IR ESTAD.
+           42   MONITORING                   85   PGTO DE RV
+
+Extrato Eletrônico - Especificação Técnica                                                 38
+
+
+
+
+          5.5 Tabela V – Ajustes
+
+           86   ANTECIPAÇAO DOLAR
+           87   DEVOL.CANCEL.DOLAR
+           88   TIER PRICING
+           89   EST CONS.SERASA/AVS
+           90   ESTOR.TARIFAENV.DOC
+           91   ESTORNOPOSPERDIDO
+           92   ESTOR.TAREXTMENSAL
+           93   EST.EXTSALDOSABER.
+           94   ESTOR.TAXADEADESAO
+           95   EST AL.POS/TX.CONET
+           96   ESTOR.TAR2ª VIAEXT
+           97   ESTORNODEDEBITO
+           98   OFERTAREDE
+           99   DEBITONAOACATADO
+
+
+
+
+ 6        Veículos de troca de arquivos
+
+          A transmissão dos arquivos será feita por VANShomologadas pela Rede:
+
+          Interchange/GXS                              Mercador/Neogrid
+          business.center@gxs.com
+
+          Para suporte aos fluxos em produção:         vendas.edi@neogrid.com
+          (0xx11) 2167 2600 / 0800 701 7444            (0xx47) 3043 7376
+
+          Para implantação de novos fluxos:
+          (0xx11) 2536 0000
+
+          TIVIT (Proceda)                               Accesstage
+
+          sup.neg.financeiro@tivit.com.br               comercial@accesstage.com.br
+          (0xx11) 3626 6700                             (0xx11) 3549 6570 / 0800 7736633
+
+
+
+          Nexxera                                       Software Express
+
+          comercial.nexxbusiness@nexxera.com            comercial@softwareexpress.com.br
+          (0xx11) 2121 9600/2121 9665/98494 4499        (0xx11) 3170 5354
+
+

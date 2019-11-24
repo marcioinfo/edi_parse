@@ -1,0 +1,24 @@
+(edi) antonio@dev12:~/edi/Rede-SACOLAO$ cut -c -3 eevcs.txt | sort | uniq -c
+     32 002
+     32 004
+    175 006
+   4937 008
+     32 026
+     32 028
+(edi) antonio@dev12:~/edi/Rede-SACOLAO$ cut -c -3 eefis.txt | sort | uniq -c
+     32 030
+     23 032
+    183 034
+     23 037
+     32 040
+      2 045
+     23 050
+     32 052
+(edi) antonio@dev12:~/edi/Rede-SACOLAO$ cut -d ',' -f1 eevds.txt | sort | uniq -c
+     31 00
+     93 01
+      2 011
+     31 02
+     31 03
+     31 04
+   8997 05
